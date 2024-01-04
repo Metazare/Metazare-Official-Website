@@ -7,9 +7,9 @@ import Footer from '../Footer/Footer'
 export default function Base() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

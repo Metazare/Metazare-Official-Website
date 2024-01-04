@@ -3,3 +3,33 @@
   margin: 0;
   box-sizing: border-box;
 }
+body{
+  background-color: #e7e7e7;
+  padding-bottom: 40px;
+}
+.ServiceCardImage{
+  // border: 1px solid black;
+  position: relative;
+}
+.ServiceCardImage::after{
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 60%;
+  height: 60%;
+  border-radius: 8px;
+  background-color: #dddddd;
+  z-index: -2;
+}
+.ServiceCardImage::before{
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 60%;
+  height: 60%;
+  border-radius: 8px;
+  background-color: #dddddd;
+  z-index: -2;
+}
