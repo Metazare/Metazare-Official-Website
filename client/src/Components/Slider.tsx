@@ -1,36 +1,61 @@
-import React from 'react'
-import ProjectCard from './ProjectCard'
+import React from 'react';
+import Slider from 'react-slick';
+import Box from '@mui/material/Box';
+import TeamCard from './TeamCard';
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import TeamCard from './TeamCard'
+function CustomSlider() {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
 
-function Slider() {
   return (
-    <Box  position={"relative"} sx={{background:"red"}}>
-      <IconButton aria-label="" onClick={()=>{}}>
-        <KeyboardArrowLeftIcon/>
-      </IconButton>
-      <IconButton aria-label="" onClick={()=>{}}>
-        <KeyboardArrowRightIcon/>
-      </IconButton>
-      <Box display="flex" gap={3}>
-        <Box>
-          <TeamCard/>
+    <Box position="relative" padding={"0 2em"}>
+      <Slider {...settings}>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
         </Box>
-        <Box>
-          <TeamCard/>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
         </Box>
-        <Box>
-          <TeamCard/>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
         </Box>
-      </Box>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
+        </Box>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
+        </Box>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
+        </Box>
+        <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
+          <TeamCard />
+        </Box>
+      </Slider>
     </Box>
-  )
+  );
 }
 
-export default Slider
+export default CustomSlider;
