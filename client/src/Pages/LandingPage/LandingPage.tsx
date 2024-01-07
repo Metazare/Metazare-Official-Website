@@ -96,7 +96,7 @@ function LandingPage() {
     <section style={{marginTop:"150px"}}>
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
-        <Box display="flex" flexWrap={"wrap"} gap={"2em"}>
+        <Box display="flex" flexWrap={"wrap"} gap={"2em"} justifyContent={"center"}>
           <ProjectCard/>
           <ProjectCard/>
           <ProjectCard/>
