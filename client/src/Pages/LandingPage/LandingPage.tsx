@@ -1,12 +1,4 @@
 import React from 'react'
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import Logo from '../../Images/Accent.png'
-import Typography from '@mui/material/Typography'
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Images
 
@@ -16,25 +8,27 @@ import CallIcon from '@mui/icons-material/Call';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
 
 // Components
-import ServiceCard from '../../Components/ServiceCard'
-import ProjectCard from '../../Components/ProjectCard'
-import TeamCard from '../../Components/TeamCard'
+import ServiceCard from '../../Components/ServiceCard';
+import ProjectCard from '../../Components/ProjectCard';
 import Grid from '@mui/material/Grid'
-import SocialMediaButton from '../../Components/SocialMediaButton'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
+import SocialMediaButton from '../../Components/SocialMediaButton';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 // Components
-import Slider from '../../Components/Slider'
+import Slider from '../../Components/Slider';
 // Layouts
-import Footer from '../../Layouts/Footer/Footer'
+import Footer from '../../Layouts/Footer/Footer';
 
-
-
-
-
-
-
+// Utilities
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Logo from '../../Images/Accent.png';
+import Typography from '@mui/material/Typography';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 function LandingPage() {
@@ -113,12 +107,6 @@ function LandingPage() {
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Meet Our Team</Typography>
         <Slider/>
-        
-        {/* <Box display="flex"  gap={"2em"}>
-          <TeamCard/>
-          <TeamCard/>
-          <TeamCard/>
-        </Box> */}
       </Container>
     </section>
     <section style={{marginTop:"150px"}}>
