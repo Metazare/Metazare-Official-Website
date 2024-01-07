@@ -3,15 +3,35 @@ import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Logo from '../../Images/Accent.png'
 import Typography from '@mui/material/Typography'
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Images
-import ConstilationUL from '../Images/Resources/ConstilationUL.png';
-import ConstilationUR from '../Images/Resources/ConstilationUR.png';
-import ConstilationLR from '../Images/Resources/ConstilationLR.png';
-import ConstilationLL from '../Images/Resources/ConstilationLL.png';
+
+// Icons 
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CallIcon from '@mui/icons-material/Call';
+import MarkunreadIcon from '@mui/icons-material/Markunread';
 
 // Components
 import ServiceCard from '../../Components/ServiceCard'
+import ProjectCard from '../../Components/ProjectCard'
+import TeamCard from '../../Components/TeamCard'
+import Grid from '@mui/material/Grid'
+import SocialMediaButton from '../../Components/SocialMediaButton'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+
+// Components
+import Slider from '../../Components/Slider'
+// Layouts
+import Footer from '../../Layouts/Footer/Footer'
+
+
+
+
 
 
 
@@ -74,13 +94,110 @@ function LandingPage() {
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
         <Box display="flex" flexDirection={"column"} gap={"5em"}>
-          <ServiceCard variant='left' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took. '/>
-          <ServiceCard variant='right' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took. '/>
+          <ServiceCard variant='left' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took.' tools={["React","Typescript", "Express JS", "Mongo DB"]}/>
+          <ServiceCard variant='right' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took. ' tools={["React","Typescript"]}/>
         </Box>
-      
       </Container>
     </section>
-    
+    <section style={{marginTop:"150px"}}>
+      <Container maxWidth="lg">
+        <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
+        <Box display="flex" flexWrap={"wrap"} gap={"2em"}>
+          <ProjectCard/>
+          <ProjectCard/>
+          <ProjectCard/>
+        </Box>
+      </Container>
+    </section>
+    <section style={{background:"#1A1918",width:"100%", padding:"5em 0 4em",marginTop:"150px"}}>
+      <Container maxWidth="lg">
+        <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Meet Our Team</Typography>
+        <Slider/>
+        
+        {/* <Box display="flex"  gap={"2em"}>
+          <TeamCard/>
+          <TeamCard/>
+          <TeamCard/>
+        </Box> */}
+      </Container>
+    </section>
+    <section style={{marginTop:"150px"}}>
+      <Container maxWidth="lg">
+        <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600}>Frequently Ask Questions</Typography>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Accordion 1</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              malesuada lacus ex, sit amet blandit leo lobortis eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </Container>
+    </section>
+    <section style={{marginTop:"150px",background:"#0071BC", padding:"5em 0 3em"}}>
+      <Container maxWidth="lg">
+        <Grid container spacing={1}>
+          <Grid item md={7}>
+            <Typography variant="h5" color="white" fontWeight={600}>GET IN TOUCH</Typography>
+            <Typography variant="body1" color="white">We are here to serve you</Typography>
+            <Box display="flex" gap={1} alignItems={"center"} mt={2}>
+              <LocationOnIcon style={{color:"white"}}/>
+              <Typography variant="body2" fontWeight={300} color="white">Marikina, Marikina Heights</Typography>
+            </Box>
+            <Box display="flex" gap={1} alignItems={"center"} mt={1}>
+              <CallIcon style={{color:"white"}}/>
+              <Typography variant="body2" fontWeight={300} color="white">0908-265-7587</Typography>
+            </Box>
+            <Box display="flex" gap={1} alignItems={"center"} mt={1}>
+              <MarkunreadIcon style={{color:"white"}}/>
+              <Typography variant="body2" fontWeight={300} color="white">metazarestudios@gmail.com</Typography>
+            </Box>
+            <Box display="flex" gap={1} mt={"5em"} alignItems={"center"}>
+              <Typography variant="subtitle1" color="white" >Links:</Typography>
+              <SocialMediaButton type={'facebook'} link={'https://www.facebook.com/HaroldGraphsPH'} />
+              <SocialMediaButton type={'twitter'} link={'https://www.twitter.com'} />
+              <SocialMediaButton type={'github'} link={'https://www.github.com'} />
+            </Box>
+          </Grid>
+          <Grid item md={5}>
+            <Typography variant="body1" color="white">Hey! We are looking forward to start a project with you.</Typography>
+            <Grid container spacing={2} mt={1}>
+              <Grid item  xs={12}>
+                <TextField
+                  fullWidth
+                  id='Email'
+                  placeholder='Your Email'
+                  variant='outlined'
+                  style={{background:"white",border:"none",borderRadius:"8px"}}
+                />
+              </Grid>
+              <Grid item  xs={12}>
+                <TextField
+                  multiline
+                  rows={3}
+                  fullWidth
+                  id='Email'
+                  placeholder='Your Email'
+                  variant='outlined'
+                  style={{background:"white",border:"none",borderRadius:"8px"}}
+                />
+              </Grid>
+              <Grid item  xs={4}>
+                <Button variant="contained" sx={{background:"white", color:"black"}}>Submit</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </section>
+    <Footer/>
   </>
 }
 
