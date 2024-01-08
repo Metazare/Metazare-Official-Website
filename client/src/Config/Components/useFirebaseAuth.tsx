@@ -1,6 +1,6 @@
 // Firebase
 import {auth, googleProvider} from "../Firebase";
-import { createUserWithEmailAndPassword,signInWithPopup ,signOut} from 'firebase/auth';
+import { createUserWithEmailAndPassword,signInWithPopup ,signOut,signInWithCredential} from 'firebase/auth';
 
 function useFirebaseAuth() {
   const signIn = async (email:string,password:string) =>{

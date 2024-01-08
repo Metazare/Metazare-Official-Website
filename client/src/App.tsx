@@ -15,7 +15,7 @@ import { ProtectedRoute } from './Hooks/useAuth';
 
 
 // Test
-import { Auth } from './Config/Components/Auth';
+import { Auth } from './Config/Components/Login';
 
 function App() {
   return (
