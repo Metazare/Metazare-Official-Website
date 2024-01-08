@@ -87,7 +87,7 @@ function LandingPage() {
     <section style={{marginTop:"150px"}}>
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
-        <Box display="flex" flexDirection={"column"} gap={"5em"}>
+        <Box display="flex" flexDirection={"column"} gap={"5em"} alignItems={"center"}>
           <ServiceCard variant='left' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took.' tools={["React","Typescript", "Express JS", "Mongo DB"]}/>
           <ServiceCard variant='right' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took. ' tools={["React","Typescript"]}/>
         </Box>

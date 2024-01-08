@@ -20,10 +20,9 @@ type Props = {
 function ServiceCard({title,description,variant,tools}:Props) {
   
   return (
-    <Box display="flex"  sx={variant==="left"?{flexDirection:{md:"row",xs:"column"}}:{flexDirection:{md:"row-reverse",xs:"column"}}} gap={5} alignItems={"center"} justifyContent={"center"}>
+    <Box display="flex"  sx={variant==="left"?{flexDirection:{md:"row",xs:"column"} ,maxWidth:{md:"unset",xs:"450px"}}:{flexDirection:{md:"row-reverse",xs:"column"},maxWidth:{md:"unset",xs:"450px"}}} gap={5} alignItems={"center"} justifyContent={"center"}>
       <Box sx={{width:{md:"400px",xs:"100%"}}} display={"flex"} alignItems={"center"} justifyContent={"center"}>
         <Paper variant="elevation" className='ServiceCardImage' elevation={3}  sx={{background:"#D2D2D2",height:{md:"300px",xs:"400px"},width:{md:"340px",xs:"90%"}}}>
-
         </Paper>
       </Box>
       <Box flexGrow={1}  display={"flex"} justifyContent={"end"}  >
