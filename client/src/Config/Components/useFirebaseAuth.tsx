@@ -3,7 +3,7 @@ import {auth, googleProvider} from "../Firebase";
 import { createUserWithEmailAndPassword,signInWithPopup ,signOut,signInWithCredential} from 'firebase/auth';
 
 function useFirebaseAuth() {
-  const signIn = async (email:string,password:string) =>{
+  const signUp = async (email:string,password:string) =>{
     try{
       await createUserWithEmailAndPassword(auth,email,password)
     }catch(err){
@@ -24,7 +24,7 @@ function useFirebaseAuth() {
       console.log(err)
     }
   }
-  return {auth,signInWithGoogle,signIn,signout}
+  return {auth,signInWithGoogle,signUp,signout}
 }
 
 export default useFirebaseAuth

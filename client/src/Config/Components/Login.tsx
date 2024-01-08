@@ -21,7 +21,7 @@ import { useFormik } from 'formik';
 
 
 export const Auth = () =>{
-  const {auth,signIn,signInWithGoogle,signout} = useFirebaseAuth();
+  const {auth,signUp,signInWithGoogle,signout} = useFirebaseAuth();
 
   const formik = useFormik({
     initialValues:{
@@ -29,7 +29,7 @@ export const Auth = () =>{
       password:""
     },
     onSubmit:values =>{
-      signIn(values.email,values.password)
+      signUp(values.email,values.password)
     }
   })
 
