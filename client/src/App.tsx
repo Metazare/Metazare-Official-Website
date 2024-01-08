@@ -16,14 +16,15 @@ import { ProtectedRoute } from './Hooks/useAuth';
 
 // Test
 import { Auth } from './Config/Components/Login';
-
+import TryPulling from './Config/Components/TryPulling'
 function App() {
   return (
     <Routes>
       <Route element={<Base />} >
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Auth/>} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/testPulling" element={<TryPulling/>} />
+
       </Route>
 
       {/* Sample usage of Protected Route */}
