@@ -18,7 +18,6 @@ function useFirebase(): Data {
     if (file == null) return;
 
     const fileRef = ref(storage, `${folderName}/${file.name + v4()}`);
-
     try {
       setUploading(true); // Set loading state to true when starting the upload
 

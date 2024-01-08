@@ -13,12 +13,16 @@ import LandingPage from './Pages/LandingPage/LandingPage';
 // Hooks
 import { ProtectedRoute } from './Hooks/useAuth';
 
+
+// Test
+import { Auth } from './Config/Components/Auth';
+
 function App() {
   return (
     <Routes>
       <Route element={<Base />} >
         <Route path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/login" element={<Auth/>} />
         <Route path="/register" element={<Register/>} />
       </Route>
 
