@@ -5,13 +5,16 @@ import { createUserWithEmailAndPassword,signInWithPopup ,signOut,signInWithCrede
 
 function useFirebaseAuth() {
   const [user,setUser] = useState<object|null>({})
-  
+
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-  }, []);
 
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
+  }, [auth]);
+  
   const signUp = async (email:string,password:string) =>{
     try{
       await createUserWithEmailAndPassword(auth,email,password)

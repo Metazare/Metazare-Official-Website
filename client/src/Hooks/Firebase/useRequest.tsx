@@ -7,10 +7,10 @@ function useRequest() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown | null>(null);
 
-  const makeRequest = async (action:"post"|"get"|"delete"|"update",collectionID:string,data?:{},id?:any) => {
+  const makeRequest = async (method:"post"|"get"|"delete"|"update",collectionID:string,data?:{},id?:any) => {
     setLoading(true);
     try {
-      switch (action) {
+      switch (method) {
         case "get":
           const response = await getDocs(collection(db, collectionID));
           const filteredData = response.docs.map((doc) => ({

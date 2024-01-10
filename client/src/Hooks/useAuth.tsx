@@ -1,135 +1,76 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import {useNavigate, Outlet, Navigate} from 'react-router-dom';
-import axios from './useAxios';
+
+import {auth, googleProvider} from "../Config/Firebase";
+import { createUserWithEmailAndPassword,signInWithPopup ,signOut,signInWithCredential,onAuthStateChanged} from 'firebase/auth';
 
 interface AuthContextState {
-    user: any;
-    login: (data: LoginData) => void;
-    logout: () => void;
-    register: (data: RegisterData) => void;
-    isAuth: (id: any) => boolean;
+  user: any;
+  signUp: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+  signout: () => Promise<void>;
 }
 
-interface RegisterData {
-    name: string;
-    first: string;
-    middle: string;
-    last: string;
-    extension: string;
-    sex: string;
-    birthday: Date;
-    address: string;
-    contact: string;
-    about: string;
-    email: string;
-    password: string;
-    role: string;
-  }
-
-interface LoginData {
-  email: string;
-  password: string;
-}
-
-export const AuthContext = createContext<AuthContextState>({
+export const AuthContext = createContext<AuthContextState>(
+  {
     user: null,
-    login: () => {},
-    logout: () => {},
-    register: () => {},
-    isAuth: () => false,
-});
+    signUp: async (email: string, password: string) => {},
+    signInWithGoogle: async () => {},
+    signout: async () => {}
+  }
+)
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const navigate = useNavigate()
-    const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate()
+  const [user, setUser] = useState<any>(null);
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log(currentUser)
+    });
 
-    const login = async (data: LoginData) => {
-        const { email, password} = data;
-        try{
-            await axios
-            .post(`/auth/login`,{
-                "email" : email,
-                "password" : password
-            })
-            .then((response: any) => {
-                console.log(response.data)
-                setUser(response.data);
-                localStorage.setItem('user', JSON.stringify(response.data))
-                navigate("/profile")
-            });
-        }
-        catch (error: any){
-            console.log(error);
-            alert(error.message);
-        }
-    };
+    // Cleanup the subscription when the component unmounts
+    return () => unsubscribe();
+  }, [auth]);
 
-    const register = async (data: RegisterData) => {
-      const { name, first, middle, last, extension, sex, birthday, address, contact, about, email, password, role } = data;
 
-      try{
-          await axios
-          .post(`/auth/register`,{
-              name: name,
-              firstName: first,
-              middleName: middle,
-              lastName: last,
-              extensionName: extension,
-              sex: sex,
-              birthday: birthday,
-              address: address || ' ',
-              contact: contact || ' ',
-              about: about || ' ',
-              email: email,
-              password: password,
-              role: role,
-          })
-          .then((response: any) => {
-              console.log(response)
-              setUser(response.data.user);
-              localStorage.setItem('user', JSON.stringify(response.data.user))
-              navigate("/dashboard")
-          });
-      }
-      catch (error: any){
-          console.log(error);
-          alert(error.message);
-      }
-    };
+  const signUp = async (email:string,password:string) =>{
+    try{
+      await createUserWithEmailAndPassword(auth,email,password)
+    }catch(err){
+      console.log(err)
+    }finally{
+      navigate("/admin")
+    }
+  }
 
-    const logout = async () => {
-        await axios.post(`/auth/logout`)
-        localStorage.clear();
-        navigate("/");
-    };
+  const signInWithGoogle = async () =>{
+    try{
+      await signInWithPopup(auth,googleProvider)
+    }catch(err){
+      console.log(err)
+    }finally{
+      navigate("/admin")
+    }
+  }
+  const signout = async () =>{
+    try{
+      await signOut(auth)
+    }catch(err){
+      console.log(err)
+    }
+  }
 
-    const isAuth = (id:any) => {
-		if (!user) {
-			// User is not logged in, so they are not authorized
-			return false;
-		}
-
-		// User is logged in and authorized
-		return true;
-	};
-
-    useEffect(() => {
-        // Check if user is already logged in on first mount
-        // const loggedInUser = localStorage.getItem("user");
-        // if (loggedInUser) {
-        //     setUser(JSON.parse(loggedInUser));
-        // }
-    }, []);
-
-    return (
-        <AuthContext.Provider value={{ user, login, logout, register, isAuth }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{user,signUp,signInWithGoogle,signout}}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }
 
 

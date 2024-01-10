@@ -15,11 +15,12 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button'
 
+import { useAuth } from '../../Hooks/useAuth';
 
 
 function Register() {
-  const {user,auth,signUp,signInWithGoogle,signout} = useFirebaseAuth();
-
+  // const {user,auth,signUp,signInWithGoogle,signout} = useFirebaseAuth();
+  const {user,signUp,signInWithGoogle,signout} = useAuth();
   const formik = useFormik({
     initialValues:{
       email:"",
