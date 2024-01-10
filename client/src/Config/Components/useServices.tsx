@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import useGetRequest from './useGetRequest';
+import useRequest from './useRequest';
 function useServices() {
-  const { data, loading, error, makeRequest } = useGetRequest();
+  const { data, loading, error, makeRequest } = useRequest();
   // Get all requests list
   const getServicesList = ()=>{
     makeRequest("get","Services")

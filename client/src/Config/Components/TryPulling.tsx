@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import useReqServices from './useReqServices'
+import useReqServices from './useServices'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
