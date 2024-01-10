@@ -6,24 +6,23 @@ import Base from './Layouts/Base/Base';
 
 // Pages
 import Default from './Pages/Default/Default';
-import Login from './Pages/Login/Login';
+import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register';
 import LandingPage from './Pages/LandingPage/LandingPage';
 
 // Hooks
 import { ProtectedRoute } from './Hooks/useAuth';
 
-
 // Test
-import { Auth } from './Config/Components/Login';
 import TryPulling from './Config/Components/TryPulling'
 function App() {
   return (
     <Routes>
       <Route element={<Base />} >
         <Route path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<Auth/>} />
-        <Route path="/testPulling" element={<TryPulling/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+        {/* <Route path="/testPulling" element={<TryPulling/>} /> */}
       </Route>
 
       {/* Sample usage of Protected Route */}

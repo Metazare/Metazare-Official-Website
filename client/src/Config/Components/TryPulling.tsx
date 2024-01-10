@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import useReqServices from './useServices'
+import useServices from '../../Hooks/Firebase/useServices'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -11,7 +11,7 @@ import Button from '@mui/material/Button'
 
 
 function TryPulling() {
-  const {data,getServicesList,postService} = useReqServices();
+  const {data,getServicesList,postService} = useServices();
 
   useEffect(()=>{
     getServicesList();
