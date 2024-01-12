@@ -2,10 +2,11 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import {useNavigate, Outlet, Navigate} from 'react-router-dom';
 
 import {auth, googleProvider} from "../Config/Firebase";
-import { createUserWithEmailAndPassword,signInWithPopup ,signOut,signInWithCredential,onAuthStateChanged} from 'firebase/auth';
+import { createUserWithEmailAndPassword,signInWithPopup ,signOut,onAuthStateChanged,signInWithEmailAndPassword} from 'firebase/auth';
 
 interface AuthContextState {
   user: any;
+  signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signout: () => Promise<void>;
@@ -16,7 +17,8 @@ export const AuthContext = createContext<AuthContextState>(
     user: null,
     signUp: async (email: string, password: string) => {},
     signInWithGoogle: async () => {},
-    signout: async () => {}
+    signout: async () => {},
+    signIn: async () => {}
   }
 )
 
@@ -47,6 +49,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       navigate("/admin")
     }
   }
+  const signIn = async ( email: string,password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.error("Sign-in error:", err);
+    }finally{
+      navigate("/admin")
+    }
+  };
+
 
   const signInWithGoogle = async () =>{
     try{
@@ -66,7 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   return (
-    <AuthContext.Provider value={{user,signUp,signInWithGoogle,signout}}>
+    <AuthContext.Provider value={{user,signUp,signInWithGoogle,signout,signIn}}>
       {children}
     </AuthContext.Provider>
   );

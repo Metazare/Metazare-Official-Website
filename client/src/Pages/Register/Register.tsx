@@ -1,6 +1,5 @@
 
 // Utilities
-import useFirebaseAuth from '../../Hooks/Firebase/useFirebaseAuth';
 import { useFormik } from 'formik';
 
 // Icons & Images

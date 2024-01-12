@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import useRequest from './useRequest';
 import {ServiceType} from './useTypes'
 
 function useServices() {
+  useEffect(()=>{
+    getServicesList()
+  },[])
+
   const { data, loading, error, makeRequest } = useRequest();
   // Get all requests list
   const getServicesList = ()=>{

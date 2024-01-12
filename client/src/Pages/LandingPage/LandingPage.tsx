@@ -30,16 +30,19 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useServices from '../../Hooks/Firebase/useServices';
+import useInformation from '../../Hooks/Firebase/useInformation';
+
+
+
+
 function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
-
+  const {data:information,loading:loadingInformation,getInformation} = useInformation();
   useEffect(()=>{
     getServicesList()
+    getInformation()
   },[])
-
-  if(loadingServices) return <>loading</>
-  console.log("dito po")
-  console.log(services)
+  if(loadingServices && loadingInformation) return <>loading</>
   return <>
     <Container maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
       <img src={Logo} alt="" width={"60%"}/>
@@ -75,7 +78,7 @@ function LandingPage() {
           </Box>
           <Box padding={"0 2em"}>
             <Typography variant="h5" mb={".5em"} textAlign={"center"} fontWeight={600} sx={{color:"white"}}>About Us</Typography>
-            <Typography variant="body1" fontWeight={300} lineHeight={"2em"} margin={"auto"} maxWidth={"900px"} textAlign={"center"}  sx={{color:"white"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took </Typography>
+            <Typography variant="body1" fontWeight={300} lineHeight={"2em"} margin={"auto"} maxWidth={"900px"} textAlign={"center"}  sx={{color:"white"}}>{information != null &&information[0]?.aboutUs}</Typography>
           </Box>
           <Box display="flex" justifyContent={"space-between"} mt={3}>
             <svg width="55" height="25" viewBox="0 0 55 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +100,6 @@ function LandingPage() {
         <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
         <Box display="flex" flexDirection={"column"} gap={"5em"} alignItems={"center"}>
           {services?.map((service: any,index:unknown) => (
-            
             <ServiceCard key={service.id} title={service.title} description={service.description} tools={service.tools} index={index} imageUrl={service.imageUrl}/>
           ))}
         </Box>
@@ -143,25 +145,38 @@ function LandingPage() {
       <Container maxWidth="lg">
         <Grid container spacing={1}>
           <Grid item md={7}>
-            <Typography variant="h5" color="white" fontWeight={600}>GET IN TOUCH</Typography>
-            <Typography variant="body1" color="white">We are here to serve you</Typography>
-            <Box display="flex" gap={1} alignItems={"center"} mt={2}>
-              <LocationOnIcon style={{color:"white"}}/>
-              <Typography variant="body2" fontWeight={300} color="white">Marikina, Marikina Heights</Typography>
-            </Box>
-            <Box display="flex" gap={1} alignItems={"center"} mt={1}>
-              <CallIcon style={{color:"white"}}/>
-              <Typography variant="body2" fontWeight={300} color="white">0908-265-7587</Typography>
-            </Box>
-            <Box display="flex" gap={1} alignItems={"center"} mt={1}>
-              <MarkunreadIcon style={{color:"white"}}/>
-              <Typography variant="body2" fontWeight={300} color="white">metazarestudios@gmail.com</Typography>
-            </Box>
-            <Box display="flex" gap={1} mt={"5em"} alignItems={"center"}>
-              <Typography variant="subtitle1" color="white" >Links:</Typography>
-              <SocialMediaButton type={'facebook'} link={'https://www.facebook.com/HaroldGraphsPH'} />
-              <SocialMediaButton type={'twitter'} link={'https://www.twitter.com'} />
-              <SocialMediaButton type={'github'} link={'https://www.github.com'} />
+            <Box display="flex" flexDirection={"column"} height={"100%"}>
+              <Typography variant="h5" color="white" fontWeight={600}>GET IN TOUCH</Typography>
+              <Typography variant="body1" color="white">We are here to serve you</Typography>
+              <Box flexGrow={1}>
+                {information != null && information[0]?.location === ""?"":
+                  <Box display="flex" gap={1} alignItems={"center"} mt={2}>
+                    <LocationOnIcon style={{color:"white"}}/>
+                    <Typography variant="body2" fontWeight={300} color="white">{information != null && information[0]?.location}</Typography>
+                  </Box>
+                }
+                {information != null && information[0]?.phone === ""?"":
+                  <Box display="flex" gap={1} alignItems={"center"} mt={1}>
+                    <CallIcon style={{color:"white"}}/>
+                    <Typography variant="body2" fontWeight={300} color="white">{information != null && information[0]?.phone}</Typography>
+                  </Box>
+                }
+                {information != null && information[0]?.email === ""?"":
+                  <Box display="flex" gap={1} alignItems={"center"} mt={1}>
+                    <MarkunreadIcon style={{color:"white"}}/>
+                    <Typography variant="body2" fontWeight={300} color="white">{information != null && information[0]?.email}</Typography>
+                  </Box>
+                } 
+              </Box>
+              <Box display="flex" gap={1} mt={"5em"} alignItems={"center"}>
+                <Typography variant="subtitle1" color="white" >Links:</Typography>
+                {information != null && information[0]?.facebook === ""?"":
+                  <SocialMediaButton type={'facebook'} link={information != null && information[0]?.facebook} />
+                }
+                {information != null && information[0]?.github === ""?"":
+                  <SocialMediaButton type={'facebook'} link={information != null && information[0]?.github} />
+                }
+              </Box>
             </Box>
           </Grid>
           <Grid item md={5}>

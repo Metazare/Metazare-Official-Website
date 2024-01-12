@@ -11,13 +11,13 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button'
 
 // Utilities
-import useFirebaseAuth from '../../Hooks/Firebase/useFirebaseAuth';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
+import { useAuth } from '../../Hooks/useAuth';
 
 
 function Login() {
-  const {auth,signUp,signInWithGoogle,signout} = useFirebaseAuth();
+  const {signUp,signInWithGoogle,signIn} = useAuth();
 
   const formik = useFormik({
     initialValues:{
@@ -25,7 +25,7 @@ function Login() {
       password:""
     },
     onSubmit:values =>{
-      signUp(values.email,values.password)
+      signIn(values.email,values.password)
     }
   })
 
@@ -77,9 +77,6 @@ function Login() {
       </Box>
       <Button variant="text" onClick={signInWithGoogle} fullWidth startIcon={<GoogleIcon color='error'/>} sx={{color:"black"}}>
         Sign up with Google
-      </Button>
-      <Button variant="text" onClick={signout} color="primary">
-        logout
       </Button>
     </Paper>
   </Container>
