@@ -25,11 +25,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<any>(null);
   
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
+      await setUser(currentUser);
       console.log(currentUser)
+      if(currentUser === null && window.location.href.includes("admin")){
+        navigate("/")
+      }
     });
-
+    
     // Cleanup the subscription when the component unmounts
     return () => unsubscribe();
   }, [auth]);

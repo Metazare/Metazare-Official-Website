@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { storage } from './../../firebase';
+import {storage} from './../Config/Firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 
@@ -20,7 +20,6 @@ function useFirebase(): Data {
     const fileRef = ref(storage, `${folderName}/${file.name + v4()}`);
     try {
       setUploading(true); // Set loading state to true when starting the upload
-
       await uploadBytes(fileRef, file);
       const url = await getDownloadURL(fileRef);
       setDownloadURL(url);

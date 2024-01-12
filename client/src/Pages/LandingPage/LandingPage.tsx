@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // Images
 
@@ -29,9 +29,17 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-
+import useServices from '../../Hooks/Firebase/useServices';
 function LandingPage() {
+  const {data:services,loading:loadingServices,getServicesList} = useServices();
+
+  useEffect(()=>{
+    getServicesList()
+  },[])
+
+  if(loadingServices) return <>loading</>
+  console.log("dito po")
+  console.log(services)
   return <>
     <Container maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
       <img src={Logo} alt="" width={"60%"}/>
@@ -88,8 +96,10 @@ function LandingPage() {
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
         <Box display="flex" flexDirection={"column"} gap={"5em"} alignItems={"center"}>
-          <ServiceCard variant='left' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took.' tools={["React","Typescript", "Express JS", "Mongo DB"]}/>
-          <ServiceCard variant='right' title="Web Development" description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took. ' tools={["React","Typescript"]}/>
+          {services?.map((service: any,index:unknown) => (
+            
+            <ServiceCard key={service.id} title={service.title} description={service.description} tools={service.tools} index={index} imageUrl={service.imageUrl}/>
+          ))}
         </Box>
       </Container>
     </section>

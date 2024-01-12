@@ -13,6 +13,11 @@ import Admin from './Pages/Admin/Admin';
 // Hooks
 import { ProtectedRoute } from './Hooks/useAuth';
 
+
+// Admin
+import AppBase from './Layouts/Base/AppBase';
+import Services from './Pages/Admin/Manage/Services';
+
 // Test
 import TryPulling from './Config/Components/TryPulling'
 function App() {
@@ -22,10 +27,12 @@ function App() {
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/admin" element={<Admin/>} />
-        {/* <Route path="/testPulling" element={<TryPulling/>} /> */}
       </Route>
 
+      <Route element={<AppBase />} >
+        <Route path="/admin" element={<Admin/>} />
+        <Route path="/admin/services" element={<Services/>} />
+      </Route>
       {/* Sample usage of Protected Route */}
       <Route element={<ProtectedRoute allowedRoles={["admin"]}/>}>
         <Route path="/private" element={<Default/>} />

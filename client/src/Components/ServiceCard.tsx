@@ -6,27 +6,28 @@ import Paper from '@mui/material/Paper'
 
 
 
-
-
-
-
 type Props = {
-  variant: "left" | "right";
   title: string;
   description?: string;
   tools?: string[]; 
+  key:string
+  index:any
+  imageUrl:string
 };
 
-function ServiceCard({title,description,variant,tools}:Props) {
+function ServiceCard({title,description,tools,key,index,imageUrl}:Props) {
   
   return (
-    <Box display="flex"  sx={variant==="left"?{flexDirection:{md:"row",xs:"column"} ,maxWidth:{md:"unset",xs:"450px"}}:{flexDirection:{md:"row-reverse",xs:"column"},maxWidth:{md:"unset",xs:"450px"}}} gap={5} alignItems={"center"} justifyContent={"center"}>
+    <Box  key={key} display="flex"  sx={index%2==0?{width:"100%",flexDirection:{md:"row",xs:"column"} ,maxWidth:{md:"unset",xs:"450px"}}:{flexDirection:{md:"row-reverse",xs:"column"},maxWidth:{md:"unset",xs:"450px"}}} gap={5} alignItems={"center"} justifyContent={"center"}>
       <Box sx={{width:{md:"400px",xs:"100%"}}} display={"flex"} alignItems={"center"} justifyContent={"center"}>
         <Paper variant="elevation" className='ServiceCardImage' elevation={3}  sx={{background:"#D2D2D2",height:{md:"300px",xs:"400px"},width:{md:"340px",xs:"90%"}}}>
+          <Box width={"100%"} height={"100%"} overflow={"hidden"} borderRadius={"5px"}>
+            <img width={"100%"} src={imageUrl} alt="" />
+          </Box>
         </Paper>
       </Box>
       <Box flexGrow={1}  display={"flex"} justifyContent={"end"}  >
-        <Box sx={{maxWidth:{md:"700px",xs:"unset"}}} >
+        <Box sx={{width:{md:"700px",xs:"unset"}}} >
           <Typography variant="h6"  color="initial">{title}</Typography>
           <Typography variant="body2"  mt={2} color="initial">{description}</Typography>
           <Typography variant="subtitle1" mt={2} fontWeight={600} color="initial">Tools</Typography>

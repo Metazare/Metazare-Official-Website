@@ -16,7 +16,8 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button'
 
 import { useAuth } from '../../Hooks/useAuth';
-
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   // const {user,auth,signUp,signInWithGoogle,signout} = useFirebaseAuth();
@@ -30,7 +31,12 @@ function Register() {
       signUp(values.email,values.password)
     }
   })
-  
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(user != null){
+      navigate('/admin')
+    }
+  },[])
   return (
     <Container maxWidth="sm" sx={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}} >
     <Paper variant="elevation" elevation={2} sx={{padding:"1em"}} >
