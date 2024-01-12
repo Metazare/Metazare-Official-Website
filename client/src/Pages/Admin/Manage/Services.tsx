@@ -22,7 +22,6 @@ function Services() {
     // console.log(services)
   },[])
 
-
   const addServiceForm = useFormik({
     initialValues:{
       title:"",
