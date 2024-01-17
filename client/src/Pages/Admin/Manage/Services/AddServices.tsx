@@ -1,25 +1,29 @@
 import { useEffect,useState } from 'react'
-import useServices from '../../../Hooks/Firebase/useServices'
+import useServices from '../../../../Hooks/Firebase/useServices'
 import {useFormik } from 'formik';
-import useFirebase from '../../../Hooks/useFirebase';
+import useFirebase from '../../../../Hooks/useFirebase';
+
 
 // MUI
-import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
 
 
-function Services() {
+type Props = {
+  modalClose:() => void
+}
+function AddServices({modalClose}:Props) {
   const {downloadURL,uploadFile} = useFirebase();
   const {data:services,loading:loadingServices,getServicesList,postService} = useServices();
 
   useEffect(()=>{
     getServicesList()
-    // console.log(services)
   },[])
 
   const addServiceForm = useFormik({
@@ -35,15 +39,16 @@ function Services() {
       if(downloadURL){
         postService({...values,imageUrl:downloadURL});
         resetForm();
+        modalClose();
       }
     }
   })
   if(loadingServices)return <>"Loading..."</>
-
   return (
-    <Container maxWidth="lg" sx={{padding:"3em"}}>
-      <form onSubmit={addServiceForm.handleSubmit}>
-        <Grid container spacing={3}>
+    <Box >
+      <Typography variant="h5" fontWeight={600} color="primary">Add Services</Typography>
+      <form onSubmit={addServiceForm.handleSubmit} style={{marginTop:"25px"}}>
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
               name="title"
@@ -67,7 +72,6 @@ function Services() {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="body1" color="initial">Tools</Typography>
             <Autocomplete
               fullWidth
               multiple
@@ -105,15 +109,16 @@ function Services() {
               }}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} mt={3}>
             <Button type='submit' variant="contained" color="primary" sx={{float:"right"}}>
               Submit
             </Button>
           </Grid>
         </Grid>
       </form>
-    </Container>
+    </Box>
+    
   )
 }
 
-export default Services
+export default AddServices

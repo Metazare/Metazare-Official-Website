@@ -11,7 +11,6 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 function Sidebar() {
   const [sideBar,setSideBar] = useState(true)
   return (
-    
     <Box sx={{width:"300px",background:"white",boxShadow:"0 0 15px rgba(0,0,0,.4)",minHeight:"100vh",flexDirection:"column",display: { md: "flex", xs: sideBar ? "block" : "none" }}}>
       <Box display="flex" justifyContent={"center"} sx={{padding:"2em 0 3em"}}>
         <img  width={"90%"} src={Logo} alt="logo"  loading='lazy'/>

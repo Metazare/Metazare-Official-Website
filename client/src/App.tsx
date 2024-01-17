@@ -16,7 +16,7 @@ import { ProtectedRoute } from './Hooks/useAuth';
 
 // Admin
 import AppBase from './Layouts/Base/AppBase';
-import Services from './Pages/Admin/Manage/Services';
+import Services from './Pages/Admin/Manage/Services/Services';
 import Content from './Pages/Admin/Manage/Content';
 
 // Test
