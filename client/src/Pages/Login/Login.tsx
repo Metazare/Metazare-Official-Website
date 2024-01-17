@@ -9,6 +9,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button'
+import Alert from '@mui/material/Alert';
 
 // Utilities
 import { useFormik } from 'formik';
@@ -17,7 +18,7 @@ import { useAuth } from '../../Hooks/useAuth';
 
 
 function Login() {
-  const {signUp,signInWithGoogle,signIn} = useAuth();
+  const {error,signInWithGoogle,signIn} = useAuth();
 
   const formik = useFormik({
     initialValues:{
@@ -35,10 +36,12 @@ function Login() {
   return (
     <Container maxWidth="sm" sx={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}} >
     <Paper variant="elevation" elevation={2} sx={{padding:"1em"}} >
-      <img style={{width:"60%",margin:"25px auto 45px",display:"block"}}  src={Logo} alt="" />
+      <a href="/"><img style={{width:"60%",margin:"35px auto 40px",display:"block"}}  src={Logo} alt="" /></a>
       <form onSubmit={formik.handleSubmit}>
+        {error !== null && <Alert variant='filled' severity="error" sx={{marginBottom:"30px"}}>{error}</Alert>}
         <Grid container spacing={2}>
           <Grid item xs={12}>
+            
             <TextField
               required
               type='email'
@@ -70,13 +73,13 @@ function Login() {
         </Grid>
       </form>
 
-      <Box display="flex" alignItems={"center"} gap={3} mt={2} mb={2} sx={{opacity:".5"}}>
+      <Box display="flex" alignItems={"center"} gap={3} mt={3} mb={3} sx={{opacity:".5"}}>
         <hr style={{flexGrow:"1"}}/>
         <Typography variant="subtitle2" color="initial">Or</Typography>
         <hr style={{flexGrow:"1"}}/>
       </Box>
       <Button variant="text" onClick={signInWithGoogle} fullWidth startIcon={<GoogleIcon color='error'/>} sx={{color:"black"}}>
-        Sign up with Google
+        Sign in with Google
       </Button>
     </Paper>
   </Container>

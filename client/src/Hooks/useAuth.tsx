@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword,signInWithPopup ,signOut,onAuthStateChan
 
 interface AuthContextState {
   user: any;
+  error:any;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -15,6 +16,7 @@ interface AuthContextState {
 export const AuthContext = createContext<AuthContextState>(
   {
     user: null,
+    error: null,
     signUp: async (email: string, password: string) => {},
     signInWithGoogle: async () => {},
     signout: async () => {},
@@ -25,8 +27,9 @@ export const AuthContext = createContext<AuthContextState>(
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const navigate = useNavigate()
   const [user, setUser] = useState<any>(null);
-  
+  const [error,setError] = useState<any>(null);
   useEffect(() => {
+    setError(null)
     const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
       await setUser(currentUser);
       console.log(currentUser)
@@ -43,19 +46,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email:string,password:string) =>{
     try{
       await createUserWithEmailAndPassword(auth,email,password)
-    }catch(err){
-      console.log(err)
-    }finally{
       navigate("/admin")
+    }catch(err){
+      console.log(typeof err)
     }
   }
-  const signIn = async ( email: string,password: string) => {
+  const signIn = async (email: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.error("Sign-in error:", err);
-    }finally{
-      navigate("/admin")
+      navigate("/admin");
+    } catch (error: any) {
+      console.log(error);
+      setError(error.message); // Passing the error message to setError
     }
   };
 
@@ -63,22 +65,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signInWithGoogle = async () =>{
     try{
       await signInWithPopup(auth,googleProvider)
+      navigate("/admin")
     }catch(err){
       console.log(err)
-    }finally{
-      navigate("/admin")
     }
   }
   const signout = async () =>{
     try{
       await signOut(auth)
+      navigate("/login")
     }catch(err){
       console.log(err)
     }
   }
 
   return (
-    <AuthContext.Provider value={{user,signUp,signInWithGoogle,signout,signIn}}>
+    <AuthContext.Provider value={{user,error,signUp,signInWithGoogle,signout,signIn}}>
       {children}
     </AuthContext.Provider>
   );

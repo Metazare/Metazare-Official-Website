@@ -19,8 +19,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  // const {user,auth,signUp,signInWithGoogle,signout} = useFirebaseAuth();
-  const {user,signUp,signInWithGoogle,signout} = useAuth();
+  const {user,signUp,signInWithGoogle} = useAuth();
   const formik = useFormik({
     initialValues:{
       email:"",
@@ -31,11 +30,13 @@ function Register() {
     }
   })
   const navigate = useNavigate()
+  
   useEffect(()=>{
     if(user != null){
       navigate('/admin')
     }
-  },[])
+  },[user,navigate])
+
   return (
     <Container maxWidth="sm" sx={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}} >
     <Paper variant="elevation" elevation={2} sx={{padding:"1em"}} >
