@@ -6,7 +6,6 @@ function useServices() {
   useEffect(()=>{
     getServicesList()
   },[])
-
   const { data, loading, error, makeRequest } = useRequest();
   // Get all requests list
   const getServicesList = ()=>{

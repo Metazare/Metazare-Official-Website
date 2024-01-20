@@ -2,7 +2,7 @@ import { useEffect,useState } from 'react'
 import useServices from '../../../../Hooks/Firebase/useServices'
 import {useFormik } from 'formik';
 import useFirebase from '../../../../Hooks/useFirebase';
-
+import {ServiceType} from '../../../../Hooks/Firebase/useTypes'
 
 // MUI
 import Grid from '@mui/material/Grid'
@@ -15,17 +15,13 @@ import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 
 
+
 type Props = {
   modalClose:() => void
+  postFunc: (data: ServiceType) => void
 }
-function AddServices({modalClose}:Props) {
+function AddServices({modalClose,postFunc}:Props) {
   const {downloadURL,uploadFile} = useFirebase();
-  const {data:services,loading:loadingServices,getServicesList,postService} = useServices();
-
-  useEffect(()=>{
-    getServicesList()
-  },[])
-
   const addServiceForm = useFormik({
     initialValues:{
       title:"",
@@ -37,13 +33,12 @@ function AddServices({modalClose}:Props) {
     
     onSubmit:(values, { resetForm }) =>{
       if(downloadURL){
-        postService({...values,imageUrl:downloadURL});
+        postFunc({...values,imageUrl:downloadURL});
         resetForm();
         modalClose();
       }
     }
   })
-  if(loadingServices)return <>"Loading..."</>
   return (
     <Box >
       <Typography variant="h5" fontWeight={600} color="primary">Add Services</Typography>
@@ -100,6 +95,7 @@ function AddServices({modalClose}:Props) {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              fullWidth
               type='file'
               onChange={async(e:any)=>{
                 addServiceForm.setFieldValue('imageUrl', uploadFile(e.target.files[0], 'services'));
@@ -109,8 +105,13 @@ function AddServices({modalClose}:Props) {
               }}
             />
           </Grid>
-          <Grid item xs={12} mt={3}>
-            <Button type='submit' variant="contained" color="primary" sx={{float:"right"}}>
+          <Grid item md={4} xs={12} mt={3}>
+            <Button variant="contained" color="primary" fullWidth>
+              cancel
+            </Button>
+          </Grid>
+          <Grid item md={8} xs={12} mt={3}>
+            <Button type='submit' variant="contained" color="primary" fullWidth>
               Submit
             </Button>
           </Grid>
