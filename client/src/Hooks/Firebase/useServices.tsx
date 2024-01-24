@@ -22,7 +22,7 @@ function useServices() {
     getServicesList()
   }
   const updateService = (data:ServiceType,id:any) => {
-    makeRequest("update","Services",id);
+    makeRequest("update","Services",data,id);
     getServicesList()
   }
 

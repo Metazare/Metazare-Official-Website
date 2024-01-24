@@ -30,17 +30,17 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useServices from '../../Hooks/Firebase/useServices';
-import useInformation from '../../Hooks/Firebase/useInformation';
+import useContent from '../../Hooks/Firebase/useContent';
 
 
 
 
 function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
-  const {data:information,loading:loadingInformation,getInformation} = useInformation();
+  const {data:information,loading:loadingInformation,getBasicInformation} = useContent();
   useEffect(()=>{
     getServicesList()
-    getInformation()
+    getBasicInformation()
   },[])
   if(loadingServices && loadingInformation) return <>loading</>
   return <>

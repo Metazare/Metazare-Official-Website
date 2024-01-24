@@ -5,13 +5,15 @@ export interface ServiceType{
   imageUrl: string,
   status: string
 }
-export interface InformationType{
+export interface BasicInformation{
   aboutUs:string,
   email:string,
-  facebook:string,
-  github:string,
-  instagram:string,
   location:string,
   phone:string,
   termsCondition:string
+}
+export interface FAQType{
+  question:string,
+  answer:string,
+  sequence:number,
 }

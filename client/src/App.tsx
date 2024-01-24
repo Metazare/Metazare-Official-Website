@@ -17,7 +17,7 @@ import { ProtectedRoute } from './Hooks/useAuth';
 // Admin
 import AppBase from './Layouts/Base/AppBase';
 import Services from './Pages/Admin/Manage/Services/Services';
-import Content from './Pages/Admin/Manage/Content';
+import Content from './Pages/Admin/Manage/Contents/Content';
 
 // Test
 import TryPulling from './Config/Components/TryPulling'
