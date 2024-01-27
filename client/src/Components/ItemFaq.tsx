@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useFormik } from 'formik'
+import {FAQType} from "../Hooks/Firebase/useTypes"
+
 import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
-import {FAQType} from "../Hooks/Firebase/useTypes"
 
 
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useFormik } from 'formik'
 
 interface Props {
   data:FAQType,

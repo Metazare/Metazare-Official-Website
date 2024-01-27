@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
 import useContent from '../../../../Hooks/Firebase/useContent'
-// pages
-import BasicInformation from './Pages/BasicInformation'
-import FAQ from './Pages/FAQ'
+
+// Tabs
+import BasicInformation from './Tabs/BasicInformation'
+import FAQ from './Tabs/FAQ'
+import Team from './Tabs/Team'
+
 // Components
 import MenuSettings from './MenuSettings'
 
 // mui
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+
 
 function Content() {
   const {data:information, loading:loadingInformation,error:informationError,getBasicInformation} = useContent();
@@ -26,8 +30,9 @@ function Content() {
         <MenuSettings  title={"Our Team"} page={page} setPage={setPage}/>
       </Box>
       <Box sx={{flexGrow:"1",padding:".4em 1em",display:"flex",flexDirection:"column",gap:"4em"}}>
-        {page === "Basic Information" || page === "" ?<BasicInformation/>:""}
-        {page === "Frequently Ask Question" || page === ""? <FAQ/>:""}
+          {page === "Basic Information" || page === "" ?<BasicInformation/>:""}
+          {page === "Frequently Ask Question" || page === ""? <FAQ/>:""}
+          {page === "Our Team" || page === ""? <Team/>:""}
       </Box> 
     </Container>
   )

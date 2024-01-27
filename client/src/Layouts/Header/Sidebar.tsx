@@ -19,7 +19,6 @@ function Sidebar() {
       <NavItem type='title' icon={<FolderCopyIcon/>} title='Contents' link='admin/contents'/>
       <NavItem type='title' icon={<WorkIcon/>} title='Services' link='admin/services'/>
       <NavItem type='title' icon={<Inventory2Icon/>} title='Projects' link='admin/projects'/>
-      <NavItem type='title' icon={<PeopleAltIcon/>} title='Our Team' link='admin/team'/>
     </Box>
   )
 }

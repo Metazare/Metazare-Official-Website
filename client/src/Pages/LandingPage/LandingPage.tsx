@@ -31,18 +31,20 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useServices from '../../Hooks/Firebase/useServices';
 import useContent from '../../Hooks/Firebase/useContent';
-
+import useFAQ from '../../Hooks/Firebase/useFAQ';
 
 
 
 function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
   const {data:information,loading:loadingInformation,getBasicInformation} = useContent();
+  const {data:faqs,loading:loadingFAQ,getFAQ} = useFAQ();
   useEffect(()=>{
     getServicesList()
     getBasicInformation()
+    getFAQ()
   },[])
-  if(loadingServices && loadingInformation) return <>loading</>
+  if(loadingServices && loadingInformation && loadingFAQ) return <>loading</>
   return <>
     <Container maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
       <img src={Logo} alt="" width={"60%"}/>
@@ -124,21 +126,23 @@ function LandingPage() {
     <section style={{marginTop:"150px"}}>
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600}>Frequently Ask Questions</Typography>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Accordion 1</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+          {faqs?.map((faq: any,index:unknown) => (
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>{faq?.question}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  {faq?.answer}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        
       </Container>
     </section>
     <section style={{marginTop:"150px",background:"#0071BC", padding:"5em 0 3em"}}>
@@ -214,4 +218,4 @@ function LandingPage() {
   </>
 }
 
-export default LandingPage
+export default LandingPage  

@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import { useFormik } from 'formik';
-import {FAQType} from '../../../../../Hooks/Firebase/useTypes'
+import { useEffect } from 'react'
 
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -8,7 +6,6 @@ import Box from '@mui/material/Box'
 import useFAQ from '../../../../../Hooks/Firebase/useFAQ';
 import ItemFaq from '../../../../../Components/ItemFaq';
 import AddFaq from './AddFaq';
-import Button from '@mui/material/Button'
 
 
 export default function FAQ() {
