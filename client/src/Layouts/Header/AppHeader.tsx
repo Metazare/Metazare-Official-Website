@@ -6,7 +6,10 @@ import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-
+import Typography from '@mui/material/Typography'
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import Container from '@mui/material/Container'
 
 
 function AppHeader() {
@@ -20,9 +23,22 @@ function AppHeader() {
     setAnchorEl(null);
   };
   return (
-    <Box display="flex" sx={{padding:"1em"}}>
-      <Box flexGrow={1}>
-        
+    <Box display="flex" sx={{padding:{md:"1.8em 1.5em 1.5em",xs:"1.8em 2.5em 1.5em"}}}>
+      <Box flexGrow={1} >
+        <Typography variant="h6" color="primary">Projects</Typography>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/">
+            MUI
+          </Link>
+          <Link
+            underline="hover"
+            color="inherit"
+            href="/material-ui/getting-started/installation/"
+          >
+            Core
+          </Link>
+          <Typography color="text.primary">Breadcrumbs</Typography>
+        </Breadcrumbs>
       </Box>
       <Box display={"flex"} gap={1} alignItems={"center"}>
         <Box >

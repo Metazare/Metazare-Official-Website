@@ -1,28 +1,32 @@
 import { useEffect } from 'react';
 import useRequest from './useRequest';
-import {ServiceType} from './useTypes'
+import {TeamType} from './useTypes'
 
 export default function useTeam() {
 
   useEffect(()=>{
-
+    getTeamList();
   },[])
 
   const { data, loading, error, makeRequest } = useRequest();
-  // Get all requests list
+
   const getTeamList = ()=>{
     makeRequest("get","Team")
   }
-  // * title,description,tools
-  const postService = (data:ServiceType) => {
-    makeRequest("post","Services",data);
+
+  const postTeam = (data:TeamType) => {
+    makeRequest("post","Team",data);
+    getTeamList();
   }
-  // * ID 
-  const deleteService = (id:any) => {
-    makeRequest("delete","Services",id);
+
+  const deleteTeam = (id:any) => {
+    makeRequest("delete","Team",{},id);
+    getTeamList();
   }
-  const updateService = (data:ServiceType,id:any) => {
-    makeRequest("update","Services",data,id);
+
+  const updateTeam = (data:TeamType,id:any) => {
+    makeRequest("update","Team",data,id);
+    getTeamList();
   }
-  return {data,loading,error,postService,deleteService,updateService}
+  return {data,loading,error,postTeam,deleteTeam,updateTeam,getTeamList}
 }

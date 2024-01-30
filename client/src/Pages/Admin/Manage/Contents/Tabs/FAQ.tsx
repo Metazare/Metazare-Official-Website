@@ -22,7 +22,7 @@ export default function FAQ() {
       <Typography variant="subtitle2" sx={{opacity:".9"}}  color="initial">Frequently Ask Questions</Typography>
       <Box display="flex" flexDirection={"column"} gap={1} mt={2}>
         {ascendingOrder?.map((faq:any) => (
-          <ItemFaq data={faq} update={updateFAQ} id={faq.id} del={deleteFAQ}/>
+          <ItemFaq key={faq.id} data={faq} update={updateFAQ} id={faq.id} del={deleteFAQ}/>
         ))}
         <AddFaq submit={postFAQ} sequence={faqs === null? 1 : faqs.length + 1}/>
       </Box>

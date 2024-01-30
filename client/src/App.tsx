@@ -18,6 +18,7 @@ import { ProtectedRoute } from './Hooks/useAuth';
 import AppBase from './Layouts/Base/AppBase';
 import Services from './Pages/Admin/Manage/Services/Services';
 import Content from './Pages/Admin/Manage/Contents/Content';
+import Projects from './Pages/Admin/Manage/Projects/Projects';
 
 // Test
 import TryPulling from './Config/Components/TryPulling'
@@ -34,6 +35,8 @@ function App() {
         <Route path="/admin" element={<Admin/>} />
         <Route path="/admin/services" element={<Services/>} />
         <Route path="/admin/contents" element={<Content/>} />
+        <Route path="/admin/projects" element={<Projects/>} />
+        
       </Route>
       {/* Sample usage of Protected Route */}
       <Route element={<ProtectedRoute allowedRoles={["admin"]}/>}>

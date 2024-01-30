@@ -17,7 +17,7 @@ import Box from '@mui/material/Box'
 
 function Content() {
   const {data:information, loading:loadingInformation,error:informationError,getBasicInformation} = useContent();
-  const [page,setPage] = useState("")
+  const [page,setPage] = useState("Basic Information")
   useEffect(()=>{
     getBasicInformation();
   },[])
@@ -30,9 +30,9 @@ function Content() {
         <MenuSettings  title={"Our Team"} page={page} setPage={setPage}/>
       </Box>
       <Box sx={{flexGrow:"1",padding:".4em 1em",display:"flex",flexDirection:"column",gap:"4em"}}>
-          {page === "Basic Information" || page === "" ?<BasicInformation/>:""}
-          {page === "Frequently Ask Question" || page === ""? <FAQ/>:""}
-          {page === "Our Team" || page === ""? <Team/>:""}
+        {page === "Basic Information"?<BasicInformation/>:""}
+        {page === "Frequently Ask Question" ? <FAQ/>:""}
+        {page === "Our Team" ? <Team/>:""}
       </Box> 
     </Container>
   )

@@ -17,3 +17,17 @@ export interface FAQType{
   answer:string,
   sequence:number,
 }
+export interface TeamType{
+  name:string,
+  roles:string,
+  description:string,
+  image:string,
+  github?:string,
+  facebook?:string,
+  website?:string,
+}
+export interface ProjectType{
+  title:string,
+  image:string,
+  
+}

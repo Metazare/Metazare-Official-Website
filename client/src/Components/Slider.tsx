@@ -33,25 +33,25 @@ function CustomSlider() {
     <Box position="relative" padding={"0 2em"}>
       <Slider {...settings}>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
         <Box sx={{display: 'flex !important', alignItems: 'center', justifyContent: 'center' }}>
-          <TeamCard />
+          {/* <TeamCard /> */}
         </Box>
       </Slider>
     </Box>
