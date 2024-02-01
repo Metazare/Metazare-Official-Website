@@ -16,14 +16,13 @@ function useFirebase(): Data {
   // Upload file to Firebase Storage
   const uploadFile = async (file: File, folderName: string) => {
     if (file == null) return;
-
     const fileRef = ref(storage, `${folderName}/${file.name + v4()}`);
     try {
       setUploading(true); // Set loading state to true when starting the upload
       await uploadBytes(fileRef, file);
       const url = await getDownloadURL(fileRef);
       setDownloadURL(url);
-      alert('File Uploaded!');
+      console.log("uploaded")
     } catch (error) {
       // Handle the error as needed
       console.error('Error uploading file:', error);

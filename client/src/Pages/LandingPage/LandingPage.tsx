@@ -111,9 +111,7 @@ function LandingPage() {
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
         <Box display="flex" flexWrap={"wrap"} gap={"2em"} justifyContent={"center"}>
-          <ProjectCard/>
-          <ProjectCard/>
-          <ProjectCard/>
+         
         </Box>
       </Container>
     </section>

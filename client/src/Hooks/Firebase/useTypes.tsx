@@ -29,5 +29,7 @@ export interface TeamType{
 export interface ProjectType{
   title:string,
   image:string,
-  
+  type: "Mobile Application"| "Web Application" | "Games" | "UI/UX Design"| "Logo Design",
+  createdAt: number,
+  id:any
 }

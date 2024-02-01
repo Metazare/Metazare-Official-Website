@@ -13,7 +13,7 @@ export default function useProject() {
     makeRequest("get","Projects")
   }
   // * title,description,tools
-  const postService = (data:ProjectType) => {
+  const postProject = (data:ProjectType) => {
     makeRequest("post","Projects",data);
     getProjectList()
   }
@@ -27,5 +27,5 @@ export default function useProject() {
     getProjectList()
   }
 
-  return {data,loading,error,getProjectList,postService,deleteProject,updateProject}
+  return {data,loading,error,getProjectList,postProject,deleteProject,updateProject}
 }
