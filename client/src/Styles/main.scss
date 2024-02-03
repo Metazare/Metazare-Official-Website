@@ -32,3 +32,12 @@ body{
   background-color: #dddddd;
   z-index: -2;
 }
+
+.EditModal{
+  display:"none";
+  transition: all .3s ease-in-out;
+}
+.Card:hover .EditModal{
+  display: flex;
+  background-color: "#000000db" !important;
+}

@@ -1,6 +1,5 @@
 import React from 'react'
 import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
 import ProjectCard from '../../../../Components/ProjectCard'
 import useProject from '../../../../Hooks/Firebase/useProject'
 import Box from '@mui/material/Box'
@@ -9,22 +8,17 @@ import AddIcon from '@mui/icons-material/Add';
 import useModal from '../../../../Hooks/Firebase/useModal'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-
 import AddProjects from './AddProjects'
-import { ProjectType } from '../../../../Hooks/Firebase/useTypes'
-import Button from '@mui/material/Button'
-
-
-
+import Loading from '../../../../Components/Loading'
 export default function Projects() {
-  const {data:projects,loading:loadingProjects,error:errorProjects,postProject} = useProject();
+  const {data:projects,loading:loadingProjects,error:errorProjects,postProject,deleteProject,updateProject} = useProject();
   const {setOpenModal,ModalComponent,closeModal} = useModal();
   const [tabValue, setTabValue] = React.useState('Mobile Application');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
-  if(loadingProjects) return <>Loading.....</>
+  if(loadingProjects) return <Loading/>
   if(errorProjects) return <>Error.....</>
   return <>
   <Box  width={"100%"} sx={{padding:{md:".5em 1.5em 1.5em",xs:"1.8em 2.5em 1.5em"}}}>
@@ -52,21 +46,20 @@ export default function Projects() {
   <Container maxWidth="lg"  sx={{padding:"2em"}}>
     <Box display="flex" flexWrap="wrap" gap={2}>
       {tabValue === "Mobile Application" && projects?.filter((project:any) => project.type === "Mobile Application").map((project:any) => (
-        <ProjectCard key={project.id} data={project} />
+        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "Web Application" && projects?.filter((project:any) => project.type === "Web Application").map((project:any) => (
-        <ProjectCard key={project.id} data={project} />
+        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "Games" && projects?.filter((project:any) => project.type === "Games").map((project:any) => (
-        <ProjectCard key={project.id} data={project} />
+        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "UI/UX Design" && projects?.filter((project:any) => project.type === "UI/UX Design").map((project:any) => (
-        <ProjectCard key={project.id} data={project} />
+        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
-      {tabValue === "Logo Design" && projects?.filter((project:any) => project.type === "UI/UX Design").map((project:any) => (
-        <ProjectCard key={project.id} data={project} />
+      {tabValue === "Logo Design" && projects?.filter((project:any) => project.type === "Logo Design").map((project:any) => (
+        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
-      
     </Box>
     {ModalComponent()} 
   </Container>

@@ -19,7 +19,7 @@ export default function useProject() {
   }
   // * ID 
   const deleteProject = (id:any) => {
-    makeRequest("delete","Projects",id);
+    makeRequest("delete","Projects",{},id);
     getProjectList()
   }
   const updateProject = (data:ProjectType,id:any) => {

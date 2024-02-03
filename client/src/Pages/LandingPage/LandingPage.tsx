@@ -32,6 +32,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useServices from '../../Hooks/Firebase/useServices';
 import useContent from '../../Hooks/Firebase/useContent';
 import useFAQ from '../../Hooks/Firebase/useFAQ';
+import Chip from '@mui/material/Chip'
+
+
+
 
 
 
@@ -101,17 +105,20 @@ function LandingPage() {
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
         <Box display="flex" flexDirection={"column"} gap={"5em"} alignItems={"center"}>
-          {services?.map((service: any,index:unknown) => (
-            <ServiceCard key={service.id} title={service.title} description={service.description} tools={service.tools} index={index} imageUrl={service.imageUrl}/>
+          {services?.map((service: any,index:number) => (
+            <ServiceCard key={service.id} data={service} index={index} admin={false}/>
           ))}
         </Box>
       </Container>
     </section>
     <section style={{marginTop:"150px"}}>
       <Container maxWidth="lg">
-        <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
+        <Typography variant="h5" color="primary"  mb={"1em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
+        <Box display="flex" flexWrap={"wrap"} gap={1}  mb={"4em"} justifyContent={"center"} maxWidth={"300px"} margin={"auto"}>
+          <Chip variant="filled"  label="Wew" sx={{background:"none"}} onClick={()=>{}}/>
+        </Box>
         <Box display="flex" flexWrap={"wrap"} gap={"2em"} justifyContent={"center"}>
-         
+          
         </Box>
       </Container>
     </section>

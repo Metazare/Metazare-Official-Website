@@ -13,39 +13,39 @@ import Select from '@mui/material/Select';
 import useFirebase from '../../../../Hooks/useFirebase'
 
 type Props={
+  data:any
   modalClose:() => void
-  addFunc: (data: ProjectType) => void
+  updateFunc: (data: ProjectType,id:any) => void
 }
-function AddProjects({modalClose,addFunc}:Props) {
+function UpdateProject({modalClose,updateFunc,data}:Props) {
   const {downloadURL,uploadFile} =useFirebase();
 
   const [uploadFileValue,setUploadFileValue] = useState<any>();
 
-
   useEffect(()=>{
     if(downloadURL){
-      AddProject.handleSubmit()
+      updateFunc({...UpdateProject.values,image:downloadURL},data.id);
     }
   },[downloadURL])
 
-  const AddProject = useFormik({
+  const UpdateProject = useFormik({
     initialValues:{
-      title:"",
-      image:"",
-      id:"",
-      type: "Mobile Application",
-      createdAt: new Date().getTime(),
+      title:data.title,
+      image:data.image,
+      id:data.id,
+      type: data.type,
+      createdAt:data.createdAt,
     },
     onSubmit:(values:ProjectType) =>{
-      addFunc({...values,image:downloadURL});
+      updateFunc(values,data.id)
       modalClose();
     }
   })
 
   return (
     <Box minWidth={"300px"}>
-      <Typography variant="h5" fontWeight={600} color="primary">Add Projects</Typography>
-      <form onSubmit={(e)=>{e.preventDefault(); AddProject.handleSubmit()}}>
+      <Typography variant="h5" fontWeight={600} color="primary">Update Projects</Typography>
+      <form onSubmit={(e)=>{e.preventDefault(); UpdateProject.handleSubmit()}}>
         <Grid container spacing={1} mt={"10px"}>
           <Grid item xs={12}>
             <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Title</Typography>
@@ -53,8 +53,8 @@ function AddProjects({modalClose,addFunc}:Props) {
               fullWidth
               id="title"
               name='title'
-              value={AddProject.values.title}
-              onChange={AddProject.handleChange}
+              value={UpdateProject.values.title}
+              onChange={UpdateProject.handleChange}
             />
           </Grid>
           <Grid item md={6} xs={12} >
@@ -64,7 +64,7 @@ function AddProjects({modalClose,addFunc}:Props) {
               type='file'
               onChange={async(e:any)=>{
                 setUploadFileValue(e.target.files[0]);
-                // AddProject.setFieldValue('imageUrl', uploadFile(e.target.files[0], 'services'));
+                // UpdateProject.setFieldValue('imageUrl', uploadFile(e.target.files[0], 'services'));
               }}
               inputProps={{
                 accept: '.jpg',
@@ -77,8 +77,8 @@ function AddProjects({modalClose,addFunc}:Props) {
               <Select
                 id="type"
                 name='type'
-                value={AddProject.values.type}
-                onChange={AddProject.handleChange}
+                value={UpdateProject.values.type}
+                onChange={UpdateProject.handleChange}
               >
                 <MenuItem value={"Mobile Application"}>Mobile Application</MenuItem>
                 <MenuItem value={"Web Application"}>Web Application</MenuItem>
@@ -98,9 +98,13 @@ function AddProjects({modalClose,addFunc}:Props) {
           </Grid>
           <Grid item xs={7}>
             <Button variant="contained" color="primary" onClick={()=>{
-              uploadFile(uploadFileValue,"Project");
+              if(uploadFileValue){
+                uploadFile(uploadFileValue,"Project");
+              }else{
+                UpdateProject.handleSubmit();
+              }
             }} fullWidth>
-              Add
+              Update
             </Button>
           </Grid>
         </Grid>
@@ -109,4 +113,4 @@ function AddProjects({modalClose,addFunc}:Props) {
   )
 }
 
-export default AddProjects
+export default UpdateProject

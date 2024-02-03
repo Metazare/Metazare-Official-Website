@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Link as RouterLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 type Props = {
   type: "title" | "subTitle";
@@ -28,24 +29,29 @@ const Style = {
 const ActiveStyle = {
   width: "100%",
   color: "#ffffff",
-  background: "#70AE45",
+  background: "#1976d2",
   '&:hover': {
-    background: '#70AE45',
+    background: '#1976d2',
   },
 };
 
 function NavItem({ type, icon, title, link }: Props) {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  console.log(currentPath )
+  console.log(link)
   return (
     <Typography
       variant={type === "title" ? "h6" : "subtitle1"}
       component={RouterLink}
       to={link}
       color="initial"
-      sx={window.location.pathname === link ? { ...Style, ...ActiveStyle } : { ...Style }}
+      sx={currentPath === link ? { ...Style, ...ActiveStyle } : { ...Style }}
     >
       <Box display="flex" gap={"10px"} alignItems={"center"}>
         {icon} {title}
       </Box>
+      
     </Typography>
   );
 }
