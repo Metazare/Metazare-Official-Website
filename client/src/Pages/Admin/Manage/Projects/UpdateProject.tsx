@@ -43,7 +43,7 @@ function UpdateProject({modalClose,updateFunc,data}:Props) {
   })
 
   return (
-    <Box minWidth={"300px"}>
+    <Box sx={{width:{md:"500px",sm:"400px",xs:"300px"}}}>
       <Typography variant="h5" fontWeight={600} color="primary">Update Projects</Typography>
       <form onSubmit={(e)=>{e.preventDefault(); UpdateProject.handleSubmit()}}>
         <Grid container spacing={1} mt={"10px"}>

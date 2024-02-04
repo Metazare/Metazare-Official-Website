@@ -43,7 +43,7 @@ function AddProjects({modalClose,addFunc}:Props) {
   })
 
   return (
-    <Box minWidth={"300px"}>
+    <Box sx={{minWidth:{md:"500px",xs:"300px"}}}>
       <Typography variant="h5" fontWeight={600} color="primary">Add Projects</Typography>
       <form onSubmit={(e)=>{e.preventDefault(); AddProject.handleSubmit()}}>
         <Grid container spacing={1} mt={"10px"}>
