@@ -1,5 +1,4 @@
 import { useEffect,useState } from 'react'
-import useServices from '../../../../Hooks/Firebase/useServices'
 import {useFormik } from 'formik';
 import useFirebase from '../../../../Hooks/useFirebase';
 import {ServiceType} from '../../../../Hooks/Firebase/useTypes'
@@ -11,7 +10,6 @@ import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 
 
@@ -22,6 +20,15 @@ type Props = {
 }
 function AddServices({modalClose,postFunc}:Props) {
   const {downloadURL,uploadFile} = useFirebase();
+  const [uploadFileValue,setUploadFileValue] = useState<any>();
+
+  useEffect(()=>{
+    if(downloadURL){
+      postFunc({...addServiceForm.values,imageUrl:downloadURL});
+      modalClose();
+    }
+  },[downloadURL])
+
   const addServiceForm = useFormik({
     initialValues:{
       title:"",
@@ -98,7 +105,7 @@ function AddServices({modalClose,postFunc}:Props) {
               fullWidth
               type='file'
               onChange={async(e:any)=>{
-                addServiceForm.setFieldValue('imageUrl', uploadFile(e.target.files[0], 'services'));
+                setUploadFileValue(e.target.files[0])
               }}
               inputProps={{
                 accept: '.jpg',
@@ -111,7 +118,11 @@ function AddServices({modalClose,postFunc}:Props) {
             </Button>
           </Grid>
           <Grid item md={8} xs={12} mt={3}>
-            <Button type='submit' variant="contained" color="primary" fullWidth>
+            <Button variant="contained" color="primary" onClick={()=>{
+              if(uploadFileValue){
+                uploadFile(uploadFileValue,"Service");
+              }
+            }}fullWidth>
               Submit
             </Button>
           </Grid>
