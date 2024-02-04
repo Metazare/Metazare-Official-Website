@@ -18,7 +18,7 @@ function useServices() {
   }
   // * ID 
   const deleteService = (id:any) => {
-    makeRequest("delete","Services",id);
+    makeRequest("delete","Services",{},id);
     getServicesList()
   }
   const updateService = (data:ServiceType,id:any) => {

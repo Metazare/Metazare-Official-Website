@@ -10,15 +10,20 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip'
 
 import { ServiceType } from '../Hooks/Firebase/useTypes'
+import useModal from '../Hooks/Firebase/useModal'
+import UpdateService from '../Pages/Admin/Manage/Services/UpdateService'
 
 type Props = {
   data:ServiceType
+  id:any
   index:number
   admin?:boolean
+  editFunc: (data: ServiceType, id: any) => void
+  deleteFunc: (id:any)=> void
 };
 
-function ServiceCard({data,index,admin}:Props) {
-  
+function ServiceCard({id,data,index,admin,editFunc,deleteFunc}:Props) {
+  const {setOpenModal,ModalComponent,closeModal} = useModal();
   return (
     <Box  display="flex"  sx={index%2==0?{width:"100%",flexDirection:{md:"row",xs:"column"} ,maxWidth:{md:"unset",xs:"100%"}}:{width:"100%",flexDirection:{md:"row-reverse",xs:"column"},maxWidth:{md:"unset",xs:"100%"}}} gap={5} alignItems={"center"} >
       <Box sx={{width:{md:"400px",xs:"100%"}}} display={"flex"} alignItems={"center"} justifyContent={"center"}>
@@ -28,12 +33,12 @@ function ServiceCard({data,index,admin}:Props) {
             {admin?
               <Box className="EditModal" position={"absolute"} width={"100%"} height={"100%"} sx={{zIndex:"2",top:"0",left:"0",display:"none",gap:"1em",alignItems:"center",justifyContent:"center",background:"#000000db"}}>
                 <Tooltip title="Edit">
-                  <IconButton onClick={()=>{}}>
+                  <IconButton onClick={()=>{setOpenModal(<UpdateService data={data} id={id} modalClose={closeModal} updateFunc={editFunc}/>)}}>
                     <EditIcon sx={{color:"white"}}/>
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">
-                  <IconButton onClick={()=>{}}>
+                  <IconButton onClick={()=>{deleteFunc(id)}}>
                     <DeleteIcon sx={{color:"white"}}/>
                   </IconButton>
                 </Tooltip>
@@ -45,7 +50,7 @@ function ServiceCard({data,index,admin}:Props) {
       <Box flexGrow={1}  display={"block"} justifyContent={"end"} sx={{width:{md:"auto",xs:"90%"}}} >
         <Box sx={{width:{md:"auto",xs:"100%"},minWidth:"300px"}} >
           <Typography variant="h6"  color="initial">{data.title}</Typography>
-          <Typography variant="body2"  mt={2} color="initial">{data.description}</Typography>
+          <Typography variant="body2"  mt={1} color="initial">{data.description}</Typography>
           <Typography variant="subtitle1" mt={2} fontWeight={600} color="initial">Tools</Typography>
           <Box display="flex" flexWrap={"wrap"} gap={1} mt={1}>
             {data.tools?.map((items,index) => (
@@ -56,6 +61,7 @@ function ServiceCard({data,index,admin}:Props) {
           </Box>
         </Box>
       </Box>
+      {ModalComponent()}
     </Box>
   )
 }

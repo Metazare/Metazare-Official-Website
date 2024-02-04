@@ -106,7 +106,7 @@ function LandingPage() {
         <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
         <Box display="flex" flexDirection={"column"} gap={"5em"} alignItems={"center"}>
           {services?.map((service: any,index:number) => (
-            <ServiceCard key={service.id} data={service} index={index} admin={false}/>
+            <ServiceCard id={service.id} data={service} index={index} admin={false} editFunc={()=>{}} deleteFunc={()=>{}}/>
           ))}
         </Box>
       </Container>

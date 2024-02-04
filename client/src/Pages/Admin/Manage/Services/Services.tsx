@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Loading from '../../../../Components/Loading';
 
 function Services() {
-  const {data:services,loading:serviceLoading, postService} = useServices();
+  const {data:services,loading:serviceLoading, postService,updateService,deleteService} = useServices();
   const {setOpenModal,ModalComponent,closeModal} = useModal();
   
   if(serviceLoading) return <Loading/>
@@ -32,7 +32,7 @@ function Services() {
     <Container maxWidth="lg" sx={{padding:"3em"}}>
       <Box display="flex" flexDirection={"column"} sx={{gap:{md:"10em",xs:"3em"}}}>
         {services?.map((service: any,index:number) => (
-          <ServiceCard key={service.id} index={index} data={service} admin={true}/>
+          <ServiceCard id={service.id} index={index} data={service} admin={true} editFunc={updateService} deleteFunc={deleteService}/>
         ))}
       </Box>
     </Container>
