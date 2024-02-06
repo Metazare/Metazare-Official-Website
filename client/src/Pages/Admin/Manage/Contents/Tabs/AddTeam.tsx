@@ -47,10 +47,11 @@ export default function AddTeam({modalClose,addFunc}:Props) {
       name:"",
       roles:"",
       description:"",
+      gmail:"",
       github:"",
       facebook:"",
       website:"",
-      image:""
+      image:"",
     },
     validate: (values) => {
       let errors: { [key: string]: string } = {};
@@ -102,8 +103,6 @@ export default function AddTeam({modalClose,addFunc}:Props) {
       </Box>
       <form onSubmit={(e)=>{e.preventDefault(); formik.handleSubmit()}}>
         {formPage === 1 && <>
-        
-
           <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Name</Typography>
           <TextField
             fullWidth
@@ -125,7 +124,6 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             error={formik.touched.roles && formik.errors.roles !== undefined}
             helperText={formik.touched.roles && formik.errors.roles}
           />
-
           <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Description</Typography>
           <TextField
             multiline
@@ -139,7 +137,18 @@ export default function AddTeam({modalClose,addFunc}:Props) {
           />
         </>}
         {formPage === 2 && <>
-          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Facebook</Typography>
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Your Gmail</Typography>
+          <TextField
+            sx={{marginBottom:"1em"}}
+            multiline
+            fullWidth
+            id="gmail"
+            name="gmail"
+            value={formik.values.gmail}
+            onChange={formik.handleChange}
+          />
+          <hr />
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Facebook Link</Typography>
           <TextField
             multiline
             fullWidth
@@ -148,7 +157,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             value={formik.values.facebook}
             onChange={formik.handleChange}
           />
-          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Github</Typography>
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Github Link</Typography>
           <TextField
             multiline
             fullWidth
@@ -157,7 +166,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             value={formik.values.github}
             onChange={formik.handleChange}
           />
-          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Personal Website</Typography>
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Personal Website Link</Typography>
           <TextField
             multiline
             fullWidth
@@ -169,7 +178,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
         </>}
         {formPage === 3 && <>
           <Box minHeight={"300px"} sx={{background:"#1A1918",borderRadius:"8px", padding:"2em 1em"}} mt={1}>
-            <TeamCard name={formik.values.name} roles={formik.values.roles} description={formik.values.description} image={formik.values.image} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
+            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={formik.values.image} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
           </Box>
         </>}
 

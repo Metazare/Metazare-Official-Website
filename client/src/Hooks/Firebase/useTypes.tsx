@@ -21,6 +21,7 @@ export interface TeamType{
   name:string,
   roles:string,
   description:string,
+  gmail:string,
   image:string,
   github?:string,
   facebook?:string,

@@ -31,6 +31,7 @@ function Login() {
   })
 
   useEffect(()=>{
+
   },[])
 
   return (
@@ -41,7 +42,6 @@ function Login() {
         {error !== null && <Alert variant='filled' severity="error" sx={{marginBottom:"30px"}}>{error}</Alert>}
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            
             <TextField
               required
               type='email'

@@ -28,20 +28,21 @@ function App() {
       <Route element={<Base />} >
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+        {/* <Route path="/register" element={<Register/>} /> */}
       </Route>
-
-      <Route element={<AppBase />} >
-        <Route path="/admin" element={<Admin/>} />
-        <Route path="/admin/services" element={<Services/>} />
-        <Route path="/admin/contents" element={<Content/>} />
-        <Route path="/admin/projects" element={<Projects/>} />
-        
+      <Route element={<ProtectedRoute/>}>
+        <Route element={<AppBase/>} >
+          <Route path="/admin" element={<Admin/>} />
+          <Route path="/admin/services" element={<Services/>} />
+          <Route path="/admin/contents" element={<Content/>} />
+          <Route path="/admin/projects" element={<Projects/>} />
+        </Route>
       </Route>
+      
       {/* Sample usage of Protected Route */}
-      <Route element={<ProtectedRoute allowedRoles={["admin"]}/>}>
+      {/* <Route element={<ProtectedRoute allowedRoles={["admin"]}/>}>
         <Route path="/private" element={<Default/>} />
-      </Route>
+      </Route> */}
 
     </Routes>
   );

@@ -117,7 +117,6 @@ function AddServices({modalClose,postFunc}:Props) {
         default:
           break;
       }
-    
     }
   })
 
