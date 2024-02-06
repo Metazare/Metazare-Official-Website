@@ -16,10 +16,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 interface Props {
   data:FAQType,
   id:string,
+  index:any,
   del:(id: any) => void,
   update:(data: FAQType, id: any) => void,
 }
-function ItemFaq({data,id,update,del}:Props) {
+function ItemFaq({data,id,index,update,del}:Props) {
   const [toEdit,setToEdit] = useState(false);
   const formik = useFormik({
     initialValues:{
@@ -44,7 +45,7 @@ function ItemFaq({data,id,update,del}:Props) {
       {toEdit?
         <>
           <Box display="flex" alignItems={"center"} mb={1}>
-            <Typography variant="subtitle2" color="initial" fontWeight={600} flexGrow={1}>Question {data.sequence}</Typography>
+            <Typography variant="subtitle2" color="initial" fontWeight={600} flexGrow={1}>Question {index}</Typography>
             <IconButton size='small'  onClick={()=>{del(id)}}>
               <DeleteIcon  fontSize='small'/>
             </IconButton>
@@ -73,7 +74,7 @@ function ItemFaq({data,id,update,del}:Props) {
         </>
       :
         <Box display="flex" alignItems={"center"}>
-          <Typography variant="subtitle2" color="initial" sx={{opacity:".8"}} fontWeight={600} flexGrow={1}>Question {data.sequence}: <span style={{fontWeight:"400",opacity:".8"}}>{data.question}</span></Typography>
+          <Typography variant="subtitle2" color="initial" sx={{opacity:".8"}} fontWeight={600} flexGrow={1}>Question {index}: <span style={{fontWeight:"400",opacity:".8"}}>{data.question}</span></Typography>
           <IconButton  size='small' onClick={()=>{setToEdit(true)}} >
             <EditIcon fontSize="small"/>
           </IconButton>

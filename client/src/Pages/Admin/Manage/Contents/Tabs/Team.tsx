@@ -18,14 +18,14 @@ import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Avatar from '@mui/material/Avatar';
-
+import Loading from '../../../../../Components/Loading';
 export default function Team() {
   const {data:team,loading:loadingTeam,error:errorTeam,getTeamList,postTeam,deleteTeam} = useTeam();
   const {setOpenModal,ModalComponent,closeModal} = useModal();
 
 
 
-  if(loadingTeam) return <>loading</>
+  if(loadingTeam) return <Loading/>
   if(errorTeam) return <>Error</>
 
   return (

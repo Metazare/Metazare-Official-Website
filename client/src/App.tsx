@@ -39,11 +39,6 @@ function App() {
         </Route>
       </Route>
       
-      {/* Sample usage of Protected Route */}
-      {/* <Route element={<ProtectedRoute allowedRoles={["admin"]}/>}>
-        <Route path="/private" element={<Default/>} />
-      </Route> */}
-
     </Routes>
   );
 }

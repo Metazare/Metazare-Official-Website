@@ -48,6 +48,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if(user && team){
       if(checkEmailExists(user.email,team)){
         setAllowed(true)
+        console.log(user)
         navigate("/admin")
       }else{
         signout()
@@ -64,7 +65,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   }
 
-
   const signUp = async (email:string,password:string) =>{
     try{
       await createUserWithEmailAndPassword(auth,email,password)
@@ -75,7 +75,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signIn = async (email: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
     } catch (error: any) {
       console.log(error);
       setError(error.message); // Passing the error message to setError
@@ -118,30 +117,13 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = () => {
 
-  // * Gets locally stored user
-
-  
   const {user,allowed} = useAuth();
 
   return (
     user?
       allowed? 
         <Outlet/>        
-        :<Navigate to="/wew"/>
+        :<Navigate to="/error"/>
     :<Navigate to="/login"/>
-    
-    // <Navigate to="/forbidden"/>
-    // Checks if user exists
-    // user
-    //   Checks if allowed roles are defined
-    //   ? allowedRoles 
-    //       Checks if user type is part of allowed roles
-    //       ? allowedRoles?.includes(type)
-    //           ? <Outlet/>
-    //           Redirects to forbidden if user is not allowed
-    //           : <Navigate to="/forbidden"/>
-    //       : <Outlet/>   
-    //   Redirects to login if not logged in
-    //   : <Navigate to="/login"/>
   );
 };

@@ -9,11 +9,11 @@ import Team from './Tabs/Team'
 
 // Components
 import MenuSettings from './MenuSettings'
+import Loading from '../../../../Components/Loading'
 
 // mui
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-
 
 function Content() {
   const {data:information, loading:loadingInformation,error:informationError,getBasicInformation} = useContent();
@@ -21,7 +21,7 @@ function Content() {
   useEffect(()=>{
     getBasicInformation();
   },[])
-  if(loadingInformation)return<>loading</>
+  if(loadingInformation)return <Loading/>
   return (
     <Container maxWidth="lg" sx={{padding:"3em",display:"flex",gap:'3'}}>
       <Box width={"250px"} sx={{display:{md:"flex",xs:"none"},flexDirection:"column"}}>

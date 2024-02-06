@@ -18,7 +18,6 @@ type Props={
 }
 function AddProjects({modalClose,addFunc}:Props) {
   const {downloadURL,uploadFile} =useFirebase();
-
   const [uploadFileValue,setUploadFileValue] = useState<any>();
 
 

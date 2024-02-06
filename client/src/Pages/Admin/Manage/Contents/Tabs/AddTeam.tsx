@@ -14,7 +14,10 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import LensIcon from '@mui/icons-material/Lens';
 import Tooltip from '@mui/material/Tooltip'
 import TeamCard from '../../../../../Components/TeamCard'
-
+import useFirebase from '../../../../../Hooks/useFirebase'
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import LandscapeIcon from '@mui/icons-material/Landscape';
+import Avatar from '@mui/material/Avatar'
 
 
 
@@ -41,6 +44,8 @@ export default function AddTeam({modalClose,addFunc}:Props) {
       </Tooltip> 
     );
   };
+  const {downloadURL,uploadFile} =useFirebase();
+  const [uploadFileValue,setUploadFileValue] = useState<any>();
 
   const formik = useFormik({
     initialValues:{
@@ -51,7 +56,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
       github:"",
       facebook:"",
       website:"",
-      image:"",
+      image:downloadURL,
     },
     validate: (values) => {
       let errors: { [key: string]: string } = {};
@@ -68,6 +73,16 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             errors = { ...errors, description: "Description is required" };
           }
           break;
+        case 2:
+          if (!values.gmail) {
+            errors = { ...errors, gmail: "Gmail is required" };
+          }
+          break;
+        case 3:
+          if (!downloadURL) {
+            errors = { ...errors, image: "You need to upload image first" };
+          }
+          break
         default:
           break;
       }
@@ -81,8 +96,12 @@ export default function AddTeam({modalClose,addFunc}:Props) {
         case 2:
           setFormPage(3)
           break;
+
         case 3:
-          addFunc(values)
+          setFormPage(4)
+          break
+        case 4:
+          addFunc({...values,image:downloadURL})
           modalClose();
           break;
         default:
@@ -99,7 +118,9 @@ export default function AddTeam({modalClose,addFunc}:Props) {
         <hr style={{flexGrow:1}} />
         <FormButton num={2} toolTip={"Social Media"}/>
         <hr style={{flexGrow:1}} />
-        <FormButton num={3} toolTip={"Preview"}/>
+        <FormButton num={3} toolTip={"Upload Image"}/>
+        <hr style={{flexGrow:1}} />
+        <FormButton num={4} toolTip={"Preview"}/>
       </Box>
       <form onSubmit={(e)=>{e.preventDefault(); formik.handleSubmit()}}>
         {formPage === 1 && <>
@@ -146,6 +167,8 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             name="gmail"
             value={formik.values.gmail}
             onChange={formik.handleChange}
+            error={formik.touched.gmail && formik.errors.gmail !== undefined}
+            helperText={formik.touched.gmail && formik.errors.gmail}
           />
           <hr />
           <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Facebook Link</Typography>
@@ -176,9 +199,42 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             onChange={formik.handleChange}
           />
         </>}
+        
         {formPage === 3 && <>
+          <label htmlFor="image">
+            <Box display="flex" flexDirection={"column"}  height={"300px"} justifyContent={"center"} alignItems={"center"} sx={{border:"1px dashed #1976d2",borderRadius:"8px",gap:".5em",cursor:"pointer",transition:"all .3s ease-in",opacity:".6",":hover":{opacity:"1"}}}>
+              {downloadURL? 
+                <>
+                  <Box display="flex">
+                    <Avatar variant="circular" src={downloadURL}  sx={{ width: '200px', height: '200px' }} />
+                  </Box>
+                  <Typography variant="subtitle2" textAlign={"center"} fontSize={"10px"} color="initial">Click again if you want to change</Typography>
+                </>:<>
+                  <Box display="flex" gap={".5em"}>
+                    <FileUploadIcon color='primary'/>
+                    <Typography variant="body1" color="primary">Upload Image</Typography>
+                  </Box>
+                </>}
+            </Box>            
+          </label>
+          <Typography variant="subtitle2" color="error" textAlign={"center"} mt={".8em"}>{formik.touched.image && formik.errors.image !== undefined && formik.touched.image && formik.errors.image}</Typography>
+          <TextField
+            name="image"
+            id='image'
+            fullWidth
+            type='file'
+            onChange={async(e:any)=>{
+              uploadFile(e.target.files[0],"Team")
+            }}
+            inputProps={{
+              accept: '.jpg',
+            }}
+            sx={{display:"none"}}
+          />
+        </>}
+        {formPage === 4 && <>
           <Box minHeight={"300px"} sx={{background:"#1A1918",borderRadius:"8px", padding:"2em 1em"}} mt={1}>
-            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={formik.values.image} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
+            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={downloadURL} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
           </Box>
         </>}
 
@@ -191,7 +247,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
           </Grid>
           <Grid item xs={7}>
             <Button fullWidth variant="contained" color="primary" type='submit' sx={{marginTop:"1.5em"}}>
-              {formPage !== 3? "Next":"Create"}
+              {formPage !== 4? "Next":"Create"}
             </Button>
           </Grid>
         </Grid>

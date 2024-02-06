@@ -9,7 +9,7 @@ import { TeamType } from '../Hooks/Firebase/useTypes';
 function TeamCard({name,description,roles,image,website,github,facebook}:TeamType) {
   return (
     <div style={{ width: '350px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-      <Avatar variant="circular" sx={{ width: '85px', height: '85px', marginBottom: '1em' }} />
+      <Avatar variant="circular" src={image} sx={{ width: '85px', height: '85px', marginBottom: '1em' }} />
       <Typography variant="h6" color="white">
         {name}
       </Typography>

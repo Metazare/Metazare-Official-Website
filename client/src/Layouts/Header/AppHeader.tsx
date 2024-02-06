@@ -10,6 +10,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { useLocation } from 'react-router-dom';
 
 
+
 function AppHeader() {
   const{user,signout} = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -36,7 +37,8 @@ function AppHeader() {
           })}
         </Breadcrumbs>
       </Box>
-      <Box display={"flex"} gap={1} alignItems={"center"}>
+      <Box display={"flex"} alignItems={"center"}>
+        <Typography variant="body1" sx={{opacity:".8",gap:"5px"}} color="initial">{user.displayName}</Typography>
         <Box >
           <Menu
             id="basic-menu"
@@ -47,7 +49,6 @@ function AppHeader() {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={signout}>Sign out</MenuItem>
           </Menu>
         </Box>

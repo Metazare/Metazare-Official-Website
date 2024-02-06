@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import useContent from '../../../../../Hooks/Firebase/useContent';
+import Loading from '../../../../../Components/Loading';
 // Mui
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
@@ -35,7 +36,7 @@ export default function BasicInformation() {
       formik.setFieldValue("id",information[0].id)
     }
   },[information])
-  if(informationLoading) return <>Loading</>
+  if(informationLoading) return <Loading/>
   return (
     <form onSubmit={(e)=>{e.preventDefault(); formik.handleSubmit()}}>
       <Typography variant="subtitle2" sx={{opacity:".9"}} mb={2} color="initial">Basic Information</Typography>

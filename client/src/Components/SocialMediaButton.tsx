@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
-
+import LanguageIcon from '@mui/icons-material/Language';
 
 function SocialMediaButton({ type, link }: { type: string; link: string }) {
   return (
@@ -21,6 +21,7 @@ function SocialMediaButton({ type, link }: { type: string; link: string }) {
     {type === 'facebook' ? <FacebookOutlinedIcon style={{ color: 'white' }} /> : null}
     {type === 'twitter' ? <TwitterIcon style={{ color: 'white' }} /> : null}
     {type === 'github' ? <GitHubIcon style={{ color: 'white' }} /> : null}
+    {type === 'website' ? <LanguageIcon style={{ color: 'white' }} /> : null}
     {/* Add more conditions for other icons as needed */}
   </IconButton>
   );
