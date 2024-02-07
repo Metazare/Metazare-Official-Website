@@ -29,6 +29,8 @@ export interface TeamType{
 }
 export interface ProjectType{
   title:string,
+  description:"",
+  date:number,
   image:string,
   type: "Mobile Application"| "Web Application" | "Games" | "UI/UX Design"| "Logo Design",
   createdAt: number,

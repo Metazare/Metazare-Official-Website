@@ -17,6 +17,8 @@ import Button from '@mui/material/Button';
 
 // Components
 import CustomSlider from '../../Components/CustomSlider';
+import Loading from '../../Components/Loading';
+
 // Layouts
 import Footer from '../../Layouts/Footer/Footer';
 
@@ -55,7 +57,7 @@ function LandingPage() {
     getBasicInformation()
     getFAQ()
   },[])
-  if(loadingServices && loadingInformation && loadingFAQ) return <>loading</>
+  if(loadingServices && loadingInformation && loadingFAQ) return <Loading/>
   return <>
     <Container maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
       <img src={Logo} alt="" width={"60%"}/>

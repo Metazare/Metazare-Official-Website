@@ -250,7 +250,6 @@ function AddServices({modalClose,postFunc}:Props) {
         </Grid>
       </form>
     </Box>
-    
   )
 }
 

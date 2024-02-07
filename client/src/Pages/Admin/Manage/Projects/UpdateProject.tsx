@@ -30,6 +30,8 @@ function UpdateProject({modalClose,updateFunc,data}:Props) {
 
   const UpdateProject = useFormik({
     initialValues:{
+      date:0,
+      description:"",
       title:data.title,
       image:data.image,
       id:data.id,
