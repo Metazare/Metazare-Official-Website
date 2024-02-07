@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // Images
 
@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 // Components
-import Slider from '../../Components/Slider';
+import CustomSlider from '../../Components/CustomSlider';
 // Layouts
 import Footer from '../../Layouts/Footer/Footer';
 
@@ -33,7 +33,7 @@ import useServices from '../../Hooks/Firebase/useServices';
 import useContent from '../../Hooks/Firebase/useContent';
 import useFAQ from '../../Hooks/Firebase/useFAQ';
 import Chip from '@mui/material/Chip'
-
+import useProject from '../../Hooks/Firebase/useProject';
 
 
 
@@ -43,6 +43,13 @@ function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
   const {data:information,loading:loadingInformation,getBasicInformation} = useContent();
   const {data:faqs,loading:loadingFAQ,getFAQ} = useFAQ();
+  const [projectTabs,setProjectTabs] = useState("Web Application");
+  const {data:projects,loading:loadingProject} =useProject();
+
+   const tabs = (title:string) =>{
+    return <Chip color='primary' label={title} sx={title === projectTabs?{}:{transition:"all .3s ease-in",background:"none",color:"black",":hover":{color:"white"}}} onClick={()=>{setProjectTabs(title)}}/>
+  }
+
   useEffect(()=>{
     getServicesList()
     getBasicInformation()
@@ -114,18 +121,36 @@ function LandingPage() {
     <section style={{marginTop:"150px"}}>
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary"  mb={"1em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
-        <Box display="flex" flexWrap={"wrap"} gap={1}  mb={"4em"} justifyContent={"center"} maxWidth={"300px"} margin={"auto"}>
-          <Chip variant="filled"  label="Wew" sx={{background:"none"}} onClick={()=>{}}/>
+        <Box display="flex" flexWrap={"wrap"} gap={1}  mb={"4em"} justifyContent={"center"} maxWidth={"600px"} margin={"auto"}>
+          {tabs("Web Application")}
+          {tabs("Mobile Application")}
+          {tabs("Games")}
+          {tabs("UI/UX Design")}
+          {tabs("Logo Design")}
         </Box>
-        <Box display="flex" flexWrap={"wrap"} gap={"2em"} justifyContent={"center"}>
-          
+        <Box display="flex" flexWrap={"wrap"} gap={"2em"}  mt={3} minHeight={"400px"}>
+          {projectTabs === "Mobile Application" && projects?.filter((project:any) => project.type === "Mobile Application").map((project:any) => (
+            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+          ))}
+          {projectTabs === "Web Application" && projects?.filter((project:any) => project.type === "Web Application").map((project:any) => (
+            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+          ))}
+          {projectTabs === "Games" && projects?.filter((project:any) => project.type === "Games").map((project:any) => (
+            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+          ))}
+          {projectTabs === "UI/UX Design" && projects?.filter((project:any) => project.type === "UI/UX Design").map((project:any) => (
+            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+          ))}
+          {projectTabs === "Logo Design" && projects?.filter((project:any) => project.type === "Logo Design").map((project:any) => (
+            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+          ))}
         </Box>
       </Container>
     </section>
     <section style={{background:"#1A1918",width:"100%", padding:"5em 0 4em",marginTop:"150px"}}>
       <Container maxWidth="lg">
         <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Meet Our Team</Typography>
-        <Slider/>
+        <CustomSlider/>
       </Container>
     </section>
     <section style={{marginTop:"150px"}}>
@@ -183,7 +208,7 @@ function LandingPage() {
                   <SocialMediaButton type={'facebook'} link={information != null && information[0]?.facebook} />
                 }
                 {information != null && information[0]?.github === ""?"":
-                  <SocialMediaButton type={'facebook'} link={information != null && information[0]?.github} />
+                  <SocialMediaButton type={'github'} link={information != null && information[0]?.github} />
                 }
               </Box>
             </Box>

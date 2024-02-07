@@ -32,7 +32,6 @@ export default function BasicInformation() {
       formik.setFieldValue("phone",information[0].phone)
       formik.setFieldValue("email",information[0].email)
       formik.setFieldValue("termsCondition",information[0].termsCondition)
-
       formik.setFieldValue("id",information[0].id)
     }
   },[information])

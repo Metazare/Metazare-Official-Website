@@ -46,19 +46,19 @@ export default function Projects() {
   <Container maxWidth="lg"  sx={{padding:"2em"}}>
     <Box display="flex" flexWrap="wrap" gap={2}>
       {tabValue === "Mobile Application" && projects?.filter((project:any) => project.type === "Mobile Application").map((project:any) => (
-        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
+        <ProjectCard variant='admin' key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "Web Application" && projects?.filter((project:any) => project.type === "Web Application").map((project:any) => (
-        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
+        <ProjectCard variant='admin' key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "Games" && projects?.filter((project:any) => project.type === "Games").map((project:any) => (
-        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
+        <ProjectCard variant='admin' key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "UI/UX Design" && projects?.filter((project:any) => project.type === "UI/UX Design").map((project:any) => (
-        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
+        <ProjectCard variant='admin' key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
       {tabValue === "Logo Design" && projects?.filter((project:any) => project.type === "Logo Design").map((project:any) => (
-        <ProjectCard key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
+        <ProjectCard variant='admin' key={project.id} data={project} deleteFunc={deleteProject} updateFunc={updateProject}/>
       ))}
     </Box>
     {ModalComponent()} 

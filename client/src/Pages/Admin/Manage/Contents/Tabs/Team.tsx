@@ -14,16 +14,16 @@ import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
-
+import EditTeam from './EditTeam';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Avatar from '@mui/material/Avatar';
 import Loading from '../../../../../Components/Loading';
+
+
 export default function Team() {
-  const {data:team,loading:loadingTeam,error:errorTeam,getTeamList,postTeam,deleteTeam} = useTeam();
+  const {data:team,loading:loadingTeam,error:errorTeam,updateTeam,postTeam,deleteTeam} = useTeam();
   const {setOpenModal,ModalComponent,closeModal} = useModal();
-
-
 
   if(loadingTeam) return <Loading/>
   if(errorTeam) return <>Error</>
@@ -58,7 +58,9 @@ export default function Team() {
               </TableCell>
               <TableCell align="right">
                 <Box display="flex" justifyContent={"flex-end"} gap={1}>
-                  <IconButton size='medium' onClick={() => { /* Handle edit */ }}>
+                  <IconButton size='medium' onClick={()=>{
+                    setOpenModal(<EditTeam data={member} modalClose={closeModal} editFunc={updateTeam} />)
+                  }}>
                     <EditIcon fontSize='medium' />
                   </IconButton>
                   <IconButton size='medium' onClick={() => {deleteTeam(member.id)}}>
