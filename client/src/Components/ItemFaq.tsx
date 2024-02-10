@@ -41,7 +41,7 @@ function ItemFaq({data,id,index,update,del}:Props) {
   },[data])
 
   return (
-    <Box>
+    <Box sx={{transition:"all .3s ease-in" ,borderRadius:"4px",padding:".5em .5em",background:"transparent",":hover":{background:"#8080801c"}}}>
       {toEdit?
         <>
           <Box display="flex" alignItems={"center"} mb={1}>

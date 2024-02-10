@@ -20,7 +20,7 @@ export default function FAQ() {
   return<>
     <Box >
       <Typography variant="subtitle2" sx={{opacity:".9"}}  color="initial">Frequently Ask Questions</Typography>
-      <Box display="flex" flexDirection={"column"} gap={1} mt={2}>
+      <Box display="flex" flexDirection={"column"} mt={2}>
         {ascendingOrder?.map((faq:any,index:any) => (
           <ItemFaq key={faq.id} index={index+1} data={faq} update={updateFAQ} id={faq.id} del={deleteFAQ}/>
         ))}

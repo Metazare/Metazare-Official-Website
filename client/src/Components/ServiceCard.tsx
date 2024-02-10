@@ -28,7 +28,7 @@ function ServiceCard({id,data,index,admin,editFunc,deleteFunc}:Props) {
     <Box  display="flex"  sx={index%2==0?{width:"100%",flexDirection:{md:"row",xs:"column"} ,maxWidth:{md:"unset",xs:"100%"}}:{width:"100%",flexDirection:{md:"row-reverse",xs:"column"},maxWidth:{md:"unset",xs:"100%"}}} gap={5} alignItems={"center"} >
       <Box sx={{width:{md:"400px",xs:"100%"}}} display={"flex"} alignItems={"center"} justifyContent={"center"}>
         <Paper variant="elevation" className='ServiceCardImage' elevation={3}  sx={{background:"#D2D2D2",height:{md:"300px",sm:"400px", xs:"280px"},width:{md:"340px",xs:"90%"}}}>
-          <Box className={"Card"} width={"100%"} height={"100%"} overflow={"hidden"} borderRadius={"5px"} sx={{position:"relative"}}>
+          <Box className={"Card"} width={"100%"} height={"100%"} overflow={"hidden"} borderRadius={"5px"} display={"flex"} alignItems={"center"} sx={{position:"relative"}}>
             <img width={"100%"} src={data.imageUrl} alt="" />
             {admin?
               <Box className="EditModal" position={"absolute"} width={"100%"} height={"100%"} sx={{zIndex:"2",top:"0",left:"0",display:"none",gap:"1em",alignItems:"center",justifyContent:"center",background:"#000000db"}}>

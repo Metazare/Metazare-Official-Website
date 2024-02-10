@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-// Images
 
 // Icons 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -36,9 +35,7 @@ import useContent from '../../Hooks/Firebase/useContent';
 import useFAQ from '../../Hooks/Firebase/useFAQ';
 import Chip from '@mui/material/Chip'
 import useProject from '../../Hooks/Firebase/useProject';
-
-
-
+import { motion } from "framer-motion"
 
 
 function LandingPage() {
@@ -48,18 +45,15 @@ function LandingPage() {
   const [projectTabs,setProjectTabs] = useState("Web Application");
   const {data:projects,loading:loadingProject} =useProject();
 
-   const tabs = (title:string) =>{
+  const tabs = (title:string) =>{
     return <Chip color='primary' label={title} sx={title === projectTabs?{}:{transition:"all .3s ease-in",background:"none",color:"black",":hover":{color:"white"}}} onClick={()=>{setProjectTabs(title)}}/>
   }
 
-  useEffect(()=>{
-    getServicesList()
-    getBasicInformation()
-    getFAQ()
-  },[])
+
   if(loadingServices && loadingInformation && loadingFAQ) return <Loading/>
+
   return <>
-    <Container maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
+    <Container  maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
       <img src={Logo} alt="" width={"60%"}/>
       <Box display="flex" gap={2} mt={2} >
         <Typography variant="subtitle1" color="initial">About Us</Typography>
@@ -67,7 +61,6 @@ function LandingPage() {
         <Typography variant="subtitle1" color="initial">Services</Typography>
         <Typography variant="subtitle1" color="initial">Projects</Typography>
       </Box>
-
     </Container>
     <section style={{ width: "100%",position:"relative" }}>
       <svg style={{zIndex:"-20",position:"absolute",top:"0",left:"0",height:"100%"}} width="100%"  viewBox="0 0 1440 596" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -179,9 +172,42 @@ function LandingPage() {
     </section>
     <section style={{marginTop:"150px",background:"#0071BC", padding:"5em 0 3em"}}>
       <Container maxWidth="lg">
-        <Grid container spacing={1}>
-          <Grid item md={7}>
-            <Box display="flex" flexDirection={"column"} height={"100%"}>
+        <Grid container spacing={2}>
+          <Grid item md={7} xs={12}>
+            <Box  flexDirection={"column"} height={"100%"} sx={{display:{md:"none",xs:"flex"}}}>
+              <Typography variant="h5" color="white" fontWeight={600}>GET IN TOUCH</Typography>
+              <Typography variant="body1" color="white">We are here to serve you</Typography>
+              <Box display={"flex"} gap={1} alignItems={"center"} flexGrow={1} mt={2} flexWrap={"wrap"}>
+                {information != null && information[0]?.location === ""?"":
+                  <Box display="flex" gap={1} alignItems={"center"}>
+                    <LocationOnIcon style={{color:"white"}}/>
+                    <Typography variant="body2" fontWeight={300} color="white">{information != null && information[0]?.location}</Typography>
+                  </Box>
+                }
+                {information != null && information[0]?.phone === ""?"":
+                  <Box display="flex" gap={1} alignItems={"center"}>
+                    <CallIcon style={{color:"white"}}/>
+                    <Typography variant="body2" fontWeight={300} color="white">{information != null && information[0]?.phone}</Typography>
+                  </Box>
+                }
+                {information != null && information[0]?.email === ""?"":
+                  <Box display="flex" gap={1} alignItems={"center"}>
+                    <MarkunreadIcon style={{color:"white"}}/>
+                    <Typography variant="body2" fontWeight={300} color="white">{information != null && information[0]?.email}</Typography>
+                  </Box>
+                } 
+              </Box>
+              <Box display="flex" gap={1} mt={"1em"} mb={"3 em"} alignItems={"center"}>
+                <Typography variant="subtitle1" color="white" >Links:</Typography>
+                {information != null && information[0]?.facebook === ""?"":
+                  <SocialMediaButton type={'facebook'} link={information != null && information[0]?.facebook} />
+                }
+                {information != null && information[0]?.github === ""?"":
+                  <SocialMediaButton type={'github'} link={information != null && information[0]?.github} />
+                }
+              </Box>
+            </Box>
+            <Box  flexDirection={"column"} height={"100%"} sx={{display:{md:"flex",xs:"none"}}}>
               <Typography variant="h5" color="white" fontWeight={600}>GET IN TOUCH</Typography>
               <Typography variant="body1" color="white">We are here to serve you</Typography>
               <Box flexGrow={1}>
@@ -215,7 +241,7 @@ function LandingPage() {
               </Box>
             </Box>
           </Grid>
-          <Grid item md={5}>
+          <Grid item md={5} xs={12}>
             <Typography variant="body1" color="white">Hey! We are looking forward to start a project with you.</Typography>
             <Grid container spacing={2} mt={1}>
               <Grid item  xs={12}>

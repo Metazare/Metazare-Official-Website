@@ -15,7 +15,7 @@ function Sidebar() {
       <Box display="flex" justifyContent={"center"} sx={{padding:"2em 0 3em"}}>
         <img  width={"90%"} src={Logo} alt="logo"  loading='lazy'/>
       </Box>
-      <NavItem type='title' icon={<SpaceDashboardIcon/>} title='Dashboard' link='/admin/'/>
+      <NavItem type='title' icon={<SpaceDashboardIcon/>} title='Dashboard' link='/admin'/>
       <NavItem type='title' icon={<FolderCopyIcon/>} title='Contents' link='/admin/contents'/>
       <NavItem type='title' icon={<WorkIcon/>} title='Services' link='/admin/services'/>
       <NavItem type='title' icon={<Inventory2Icon/>} title='Projects' link='/admin/projects'/>

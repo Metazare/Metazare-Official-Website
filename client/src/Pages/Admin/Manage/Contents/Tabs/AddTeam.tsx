@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TeamType } from '../../../../../Hooks/Firebase/useTypes'
 import { useFormik } from 'formik'
 
@@ -46,6 +46,12 @@ export default function AddTeam({modalClose,addFunc}:Props) {
   };
   const {downloadURL,uploadFile} =useFirebase();
   const [uploadFileValue,setUploadFileValue] = useState<any>();
+  useEffect(()=>{
+    if(downloadURL){
+      addFunc({...formik.values,image:downloadURL})
+      modalClose();
+    }
+  },[downloadURL])
 
   const formik = useFormik({
     initialValues:{
@@ -79,7 +85,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
           }
           break;
         case 3:
-          if (!downloadURL) {
+          if (!uploadFileValue) {
             errors = { ...errors, image: "You need to upload image first" };
           }
           break
@@ -101,8 +107,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
           setFormPage(4)
           break
         case 4:
-          addFunc({...values,image:downloadURL})
-          modalClose();
+          uploadFile(uploadFileValue,"Team")
           break;
         default:
           break;
@@ -203,10 +208,10 @@ export default function AddTeam({modalClose,addFunc}:Props) {
         {formPage === 3 && <>
           <label htmlFor="image">
             <Box display="flex" flexDirection={"column"}  height={"300px"} justifyContent={"center"} alignItems={"center"} sx={{border:"1px dashed #1976d2",borderRadius:"8px",gap:".5em",cursor:"pointer",transition:"all .3s ease-in",opacity:".6",":hover":{opacity:"1"}}}>
-              {downloadURL? 
+              {uploadFileValue? 
                 <>
                   <Box display="flex">
-                    <Avatar variant="circular" src={downloadURL}  sx={{ width: '200px', height: '200px' }} />
+                    <Avatar variant="circular" src={URL.createObjectURL(uploadFileValue)}  sx={{ width: '200px', height: '200px' }} />
                   </Box>
                   <Typography variant="subtitle2" textAlign={"center"} fontSize={"10px"} color="initial">Click again if you want to change</Typography>
                 </>:<>
@@ -224,7 +229,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
             fullWidth
             type='file'
             onChange={async(e:any)=>{
-              uploadFile(e.target.files[0],"Team")
+              setUploadFileValue(e.target.files[0])
             }}
             inputProps={{
               accept: '.jpg',
@@ -234,7 +239,7 @@ export default function AddTeam({modalClose,addFunc}:Props) {
         </>}
         {formPage === 4 && <>
           <Box minHeight={"300px"} sx={{background:"#1A1918",borderRadius:"8px", padding:"2em 1em"}} mt={1}>
-            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={downloadURL} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
+            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={URL.createObjectURL(uploadFileValue)} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
           </Box>
         </>}
 

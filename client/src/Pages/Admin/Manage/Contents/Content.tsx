@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 
 import useContent from '../../../../Hooks/Firebase/useContent'
 
@@ -23,8 +23,8 @@ function Content() {
   },[])
   if(loadingInformation)return <Loading/>
   return (
-    <Container maxWidth="lg" sx={{padding:"3em",display:"flex",gap:'3'}}>
-      <Box width={"250px"} sx={{display:{md:"flex",xs:"none"},flexDirection:"column"}}>
+    <Container maxWidth="lg" sx={{padding:"3em",display:{md:"flex",xs:"block"},gap:'3'}}>
+      <Box  sx={{display:"flex",flexDirection:{md:"column",xs:"row"},width:{md:"250px",xs:"unset"}}} mb={2}>
         <MenuSettings  title={"Basic Information"} page={page} setPage={()=>{setPage("Basic Information")}}/>
         <MenuSettings  title={"Frequently Ask Question"} page={page} setPage={()=>{setPage("Frequently Ask Question")}}/>
         <MenuSettings  title={"Our Team"} page={page} setPage={setPage}/>

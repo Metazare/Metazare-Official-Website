@@ -1,5 +1,4 @@
 import { useEffect,useState } from 'react'
-import useServices from '../../../../Hooks/Firebase/useServices'
 import {useFormik } from 'formik';
 import useFirebase from '../../../../Hooks/useFirebase';
 import {ServiceType} from '../../../../Hooks/Firebase/useTypes'
@@ -19,8 +18,6 @@ import IconButton from '@mui/material/IconButton'
 
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import LandscapeIcon from '@mui/icons-material/Landscape';
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -190,15 +187,17 @@ function UpdateService({modalClose,updateFunc,data,id}:Props) {
         </>}
         {formPage === 2 && <>
           <label htmlFor="image">
-            <Box display="flex" flexDirection={"column"}  height={"300px"} justifyContent={"center"} alignItems={"center"} sx={{border:"1px dashed #1976d2",borderRadius:"8px",gap:".5em",cursor:"pointer",transition:"all .3s ease-in",opacity:".6",":hover":{opacity:"1"}}}>
+            <Box display="flex" flexDirection={"column"}  height={"300px"} justifyContent={"center"} alignItems={"center"} sx={{padding:"1em 0",border:"1px dashed #1976d2",borderRadius:"8px",gap:".5em",cursor:"pointer",transition:"all .3s ease-in",opacity:".6",":hover":{opacity:"1"}}}>
               {uploadFileValue? 
                 <>
-                  <LandscapeIcon fontSize='large'/>
-                  <Typography variant="body1" textAlign={"center"} color="initial">You've selected an image named ({uploadFileValue.name})</Typography>
+                  <Box display="flex" width={"80%"} height={"300px"} sx={{overflow:"hidden", borderRadius:"8px"}} justifyContent={"center"} alignItems={"start"}>
+                    <img width={"400px"} src={URL.createObjectURL(uploadFileValue)} alt="" />
+                  </Box>
                   <Typography variant="subtitle2" textAlign={"center"} fontSize={"10px"} color="initial">Click again if you want to change</Typography>
                 </>:<>
                   <Box  sx={{width:{md:"400",xs:"300px"},height:"600px",overflow:'hidden'}}>
                     <img width={"100%"} height={"auto"} src={UpdateServiceForm.values.imageUrl} alt="" />
+                    <Typography variant="subtitle2" textAlign={"center"} fontSize={"10px"} color="initial">Click again if you want to change</Typography>
                   </Box>
                 </>
               }

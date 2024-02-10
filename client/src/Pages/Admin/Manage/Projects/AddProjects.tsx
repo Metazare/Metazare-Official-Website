@@ -99,7 +99,6 @@ function AddProjects({modalClose,addFunc}:Props) {
         default:
           break;
       }
-    
     }
   })
 
