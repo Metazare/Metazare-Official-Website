@@ -36,8 +36,7 @@ import useFAQ from '../../Hooks/Firebase/useFAQ';
 import Chip from '@mui/material/Chip'
 import useProject from '../../Hooks/Firebase/useProject';
 import { motion } from "framer-motion"
-
-
+import SampleAnimation from '../../Components/SampleAnimation';
 function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
   const {data:information,loading:loadingInformation,getBasicInformation} = useContent();
@@ -53,15 +52,26 @@ function LandingPage() {
   if(loadingServices && loadingInformation && loadingFAQ) return <Loading/>
 
   return <>
-    <Container  maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
-      <img src={Logo} alt="" width={"60%"}/>
-      <Box display="flex" gap={2} mt={2} >
-        <Typography variant="subtitle1" color="initial">About Us</Typography>
-        <Typography variant="subtitle1" color="initial">Contact</Typography>
-        <Typography variant="subtitle1" color="initial">Services</Typography>
-        <Typography variant="subtitle1" color="initial">Projects</Typography>
-      </Box>
-    </Container>
+
+    <motion.div
+      initial={{ scale: 0.5,translateY: 40, opacity: 0.1 }}
+      whileInView={{ scale: 1,translateY: 1,  opacity: 1 }}
+      transition={{
+        duration: 1,
+        delay: .25,
+        ease: "backInOut",
+      }}
+    >
+      <Container  maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
+        <img src={Logo} alt="" width={"60%"}/>
+        <Box display="flex" gap={2} mt={2} >
+          <Typography variant="subtitle1" color="initial">About Us</Typography>
+          <Typography variant="subtitle1" color="initial">Contact</Typography>
+          <Typography variant="subtitle1" color="initial">Services</Typography>
+          <Typography variant="subtitle1" color="initial">Projects</Typography>
+        </Box>
+      </Container>
+    </motion.div>
     <section style={{ width: "100%",position:"relative" }}>
       <svg style={{zIndex:"-20",position:"absolute",top:"0",left:"0",height:"100%"}} width="100%"  viewBox="0 0 1440 596" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M0 595.136V0C191.838 38.9383 443.91 62.5681 720 62.5681C996.091 62.5681 1248.16 38.9383 1440 4.36563e-06V595.136C1248.16 556.198 996.091 532.568 720 532.568C443.91 532.568 191.838 556.198 0 595.136Z" fill="#0071BC" />
@@ -123,30 +133,100 @@ function LandingPage() {
           {tabs("UI/UX Design")}
           {tabs("Logo Design")}
         </Box>
-        <Box display="flex" flexWrap={"wrap"} gap={"2em"}  mt={3} minHeight={"400px"}>
-          {projectTabs === "Mobile Application" && projects?.filter((project:any) => project.type === "Mobile Application").map((project:any) => (
-            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
-          ))}
-          {projectTabs === "Web Application" && projects?.filter((project:any) => project.type === "Web Application").map((project:any) => (
-            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
-          ))}
-          {projectTabs === "Games" && projects?.filter((project:any) => project.type === "Games").map((project:any) => (
-            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
-          ))}
-          {projectTabs === "UI/UX Design" && projects?.filter((project:any) => project.type === "UI/UX Design").map((project:any) => (
-            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
-          ))}
-          {projectTabs === "Logo Design" && projects?.filter((project:any) => project.type === "Logo Design").map((project:any) => (
-            <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
-          ))}
-        </Box>
+        <motion.div
+          initial={{ translateY: "50px", opacity: 0.1 }}
+          whileInView={{ translateY: "1px", opacity: 1 }}
+          transition={{
+            duration: 1,
+            delay:.25,
+            ease: "backInOut",
+          }} 
+        >
+          <Box display="flex" flexWrap={"wrap"} gap={"2em"}  mt={"3em"} minHeight={"400px"}>
+            {projectTabs === "Mobile Application" && projects?.filter((project:any) => project.type === "Mobile Application").map((project:any,index:any) => (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0.1 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  delay: .20 * index ,
+                  ease: "backInOut",
+                }}  
+              >
+                <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+              </motion.div>
+            ))}
+            {projectTabs === "Web Application" && projects?.filter((project:any) => project.type === "Web Application").map((project:any,index:any) => (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0.1 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  delay: .20 * index ,
+                  ease: "backInOut",
+                }}  
+              >
+                <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+              </motion.div>
+            ))}
+            {projectTabs === "Games" && projects?.filter((project:any) => project.type === "Games").map((project:any,index:any) => (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0.1 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  delay: .20 * index ,
+                  ease: "backInOut",
+                }}  
+              >
+                <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+              </motion.div>
+            ))}
+            {projectTabs === "UI/UX Design" && projects?.filter((project:any) => project.type === "UI/UX Design").map((project:any,index:any) => (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0.1 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  delay: .20 * index ,
+                  ease: "backInOut",
+                }}  
+              >
+                <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+              </motion.div>
+            ))}
+            {projectTabs === "Logo Design" && projects?.filter((project:any) => project.type === "Logo Design").map((project:any,index:any) => (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0.1 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 1,
+                  delay: .20 * index ,
+                  ease: "backInOut",
+                }}  
+              >
+                <ProjectCard variant="view" key={project.id} data={project} deleteFunc={()=>{}} updateFunc={()=>{}}/>
+              </motion.div>
+            ))}
+          </Box>
+        </motion.div>
       </Container>
     </section>
     <section style={{background:"#1A1918",width:"100%", padding:"5em 0 4em",marginTop:"150px"}}>
-      <Container maxWidth="lg">
-        <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Meet Our Team</Typography>
-        <CustomSlider/>
-      </Container>
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0.1 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        transition={{
+          duration: 1,
+          delay:.25,
+          ease: "backInOut",
+        }} 
+      >
+        <Container maxWidth="lg">
+          <Typography variant="h5" color="primary" mb={"4em"} fontWeight={600} textAlign={"center"}>Meet Our Team</Typography>
+          <CustomSlider/>
+        </Container>
+      </motion.div>
     </section>
     <section style={{marginTop:"150px"}}>
       <Container maxWidth="lg">
