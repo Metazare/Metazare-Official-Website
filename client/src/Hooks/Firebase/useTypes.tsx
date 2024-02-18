@@ -5,6 +5,12 @@ export interface ServiceType{
   imageUrl: string,
   status: string
 }
+export interface EmailUsType{
+  name:string,
+  email:string,
+  message:string,
+  createdAt:number,
+}
 export interface BasicInformation{
   aboutUs:string,
   email:string,

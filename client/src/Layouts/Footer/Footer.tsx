@@ -32,8 +32,7 @@ const Footer: React.FC = () => {
               initial={{ scale: 0.5,translateY: 40, opacity: 0.1 }}
               whileInView={{ scale: 1,translateY: 1,  opacity: 1 }}
               transition={{
-                duration: 1,
-                delay: .25,
+                duration: .8,
                 ease: "backInOut",
               }}
             >

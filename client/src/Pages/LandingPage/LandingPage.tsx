@@ -12,10 +12,9 @@ import ServiceCard from '../../Components/ServiceCard';
 import ProjectCard from '../../Components/ProjectCard';
 import Grid from '@mui/material/Grid'
 import SocialMediaButton from '../../Components/SocialMediaButton';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import CustomSlider from '../../Components/CustomSlider';
 import Loading from '../../Components/Loading';
+import EmailUs from '../../Components/EmailUs';
 
 // Layouts
 import Footer from '../../Layouts/Footer/Footer';
@@ -35,9 +34,7 @@ import useFAQ from '../../Hooks/Firebase/useFAQ';
 import Chip from '@mui/material/Chip'
 import useProject from '../../Hooks/Firebase/useProject';
 import { motion } from "framer-motion"
-import SampleAnimation from '../../Components/SampleAnimation';
 import IconButton from '@mui/material/IconButton'
-
 
 function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
@@ -332,42 +329,7 @@ function LandingPage() {
           </Grid>
           <Grid item md={5} xs={12}>
             <Typography variant="body1" color="white">Hey! We are looking forward to start a project with you.</Typography>
-            <Grid container spacing={2} mt={1}>
-            <Grid item  xs={12}>
-                <TextField
-                  fullWidth
-                  id='Email'
-                  placeholder='Your Name'
-                  variant='outlined'
-                  style={{background:"white",border:"none",borderRadius:"8px"}}
-                />
-              </Grid>
-              <Grid item  xs={12}>
-                <TextField
-                  fullWidth
-                  id='Email'
-                  placeholder='Your Email'
-                  variant='outlined'
-                  style={{background:"white",border:"none",borderRadius:"8px"}}
-                />
-              </Grid>
-              <Grid item  xs={12}>
-                <TextField
-                  multiline
-                  rows={3}
-                  fullWidth
-                  id='Email'
-                  placeholder='Your Message'
-                  variant='outlined'
-                  style={{background:"white",border:"none",borderRadius:"8px"}}
-                />
-              </Grid>
-              <Grid item  xs={12}>
-                <Box display="flex" justifyContent={"end"}>
-                  <Button variant="contained" sx={{background:"white", color:"black",":hover":{color:"white"}}}>Submit</Button>
-                </Box>
-              </Grid>
-            </Grid>
+            <EmailUs/>
           </Grid>
         </Grid>
       </Container>

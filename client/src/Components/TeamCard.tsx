@@ -16,7 +16,7 @@ function TeamCard({name,description,roles,image,website,github,facebook}:TeamTyp
       <Typography variant="subtitle2" color="white">
         {roles}
       </Typography>
-      <Typography variant="body2" fontWeight={300} mt={2} textAlign={'center'} color="white">
+      <Typography variant="body2" fontWeight={300} mt={2} textAlign={'center'} sx={{opacity:".8",textAlign:"center"}} color="white">
         {description}
       </Typography>
       <Box display="flex" mt={2} gap={1}>
