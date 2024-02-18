@@ -67,6 +67,7 @@ function AddProjects({modalClose,addFunc,addProjectType}:Props) {
       image:"",
       id:"",
       type: "Games",
+      link:"",
       createdAt: new Date().getTime(),
     },
     validate: (values) => {
@@ -76,8 +77,18 @@ function AddProjects({modalClose,addFunc,addProjectType}:Props) {
         case 1:
           if (!values.title) {
             errors = { ...errors, title: "Title is required" };
+          }
+          if (!values.description) {
             errors = { ...errors, description: "description is required" };
+          }
+          if (!values.date) {
             errors = { ...errors, date: "date is required" };
+          }
+          if (!values.type) {
+            errors = { ...errors, type: "type is required" };
+          }
+          if (!values.link) {
+            errors = { ...errors, link: "Link is required" };
           }
           break;
         case 2:
@@ -141,6 +152,17 @@ function AddProjects({modalClose,addFunc,addProjectType}:Props) {
             onChange={AddProjectForm.handleChange}
             error={AddProjectForm.touched.description && AddProjectForm.errors.description !== undefined}
             helperText={AddProjectForm.touched.description && AddProjectForm.errors.description}
+          />
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Link</Typography>
+          <TextField
+            fullWidth
+            id="link"
+            name='link'
+            type='url'
+            value={AddProjectForm.values.link}
+            onChange={AddProjectForm.handleChange}
+            error={AddProjectForm.touched.link && AddProjectForm.errors.link !== undefined}
+            helperText={AddProjectForm.touched.link && AddProjectForm.errors.link}
           />
           <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Type</Typography>
           <FormControl sx={{minWidth: "400px" }}>

@@ -58,6 +58,7 @@ function UpdateProject({modalClose,updateFunc,data}:Props) {
   };
   const UpdateProjectForm = useFormik({
     initialValues:{
+      link:data.link,
       date:data.date,
       description:data.description,
       title:data.title,
@@ -122,6 +123,17 @@ function UpdateProject({modalClose,updateFunc,data}:Props) {
             onChange={UpdateProjectForm.handleChange}
             error={UpdateProjectForm.touched.description && UpdateProjectForm.errors.description !== undefined}
             helperText={UpdateProjectForm.touched.description && UpdateProjectForm.errors.description}
+          />
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Link</Typography>
+          <TextField
+            fullWidth
+            id="link"
+            name='link'
+            type='url'
+            value={UpdateProjectForm.values.link}
+            onChange={UpdateProjectForm.handleChange}
+            error={UpdateProjectForm.touched.link && UpdateProjectForm.errors.link !== undefined}
+            helperText={UpdateProjectForm.touched.link && UpdateProjectForm.errors.link}
           />
           <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Type</Typography>
           <FormControl sx={{minWidth: "400px" }}>

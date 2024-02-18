@@ -142,7 +142,7 @@ function LandingPage() {
             ease: "backInOut",
           }} 
         >
-          <Box display="flex" flexWrap={"wrap"} gap={"2em"}  mt={"3em"} minHeight={"400px"}>
+          <Box display="flex" flexWrap={"wrap"} gap={"2em"}  mt={"3em"} minHeight={"400px"} justifyContent={"center"}>
             {projectTabs === "Mobile Application" && projects?.filter((project:any) => project.type === "Mobile Application").map((project:any,index:any) => (
               <motion.div
                 initial={{ scale: 0.9, opacity: 0.1 }}
