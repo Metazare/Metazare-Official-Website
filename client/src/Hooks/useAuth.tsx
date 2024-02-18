@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import {useNavigate, Outlet, Navigate} from 'react-router-dom';
 
 import {auth, googleProvider} from "../Config/Firebase";
-import { createUserWithEmailAndPassword,signInWithRedirect ,signOut,onAuthStateChanged,signInWithEmailAndPassword} from 'firebase/auth';
+import { createUserWithEmailAndPassword,signInWithRedirect,signInWithPopup ,signOut,onAuthStateChanged,signInWithEmailAndPassword} from 'firebase/auth';
 import useTeam from './Firebase/useTeam';
 interface AuthContextState {
   user: any;
@@ -84,7 +84,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signInWithGoogle = async () =>{
     try{
-      await signInWithRedirect(auth,googleProvider)
+      await signInWithPopup(auth,googleProvider)
     }catch(err){
       console.log(err)
     }
