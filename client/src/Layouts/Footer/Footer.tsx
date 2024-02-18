@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Typography, Link, Box } from '@mui/material';
+import { motion } from "framer-motion"
 
 // Image
 import Logo from '../../Images/White.png'
@@ -24,13 +25,26 @@ const Footer: React.FC = () => {
               <path d="M67.5 31L41.4 5L33.3 45.5L4.5 25.5" stroke="white"/>
             </svg>
           </Box>
+          
           <Box padding={"0 2em"} display={"flex"} alignItems={"center"} flexDirection={"column"}>
-            <img src={Logo} width={"40%"} alt="" />
+            <motion.div 
+              style={{display:"flex",justifyContent:"center"}}
+              initial={{ scale: 0.5,translateY: 40, opacity: 0.1 }}
+              whileInView={{ scale: 1,translateY: 1,  opacity: 1 }}
+              transition={{
+                duration: 1,
+                delay: .25,
+                ease: "backInOut",
+              }}
+            >
+              <img src={Logo} width={"40%"} alt="" />
+            </motion.div>
+            
             <Box display="flex" gap={2} mt={3}>
-              <Typography variant="body1"  color="white">About Us</Typography>
-              <Typography variant="body1"  color="white">Contact</Typography>
-              <Typography variant="body1"  color="white">Services</Typography>
-              <Typography variant="body1"  color="white">Projects</Typography>
+            <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",color:"white",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#AboutUs'>About Us</Typography>
+            <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",color:"white",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#Contact'>Contact</Typography>
+            <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",color:"white",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#Services'>Services</Typography>
+            <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",color:"white",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#Projects'>Projects</Typography>
             </Box>
           </Box>
           <Box display="flex" justifyContent={"space-between"} mt={3}>
@@ -48,7 +62,7 @@ const Footer: React.FC = () => {
         </Container>
       </Box>
       <Box sx={{background:"#0B1533",padding:"3em 1em 2em"}}>
-        <Typography variant="h6" fontWeight={500} color="white" textAlign={"center"}>©2023 MetazareStudios</Typography>
+        <Typography variant="body1" fontWeight={400} color="white" textAlign={"center"}>©{new Date().getFullYear()} MetazareStudios</Typography>
       </Box>
     </footer>
   );

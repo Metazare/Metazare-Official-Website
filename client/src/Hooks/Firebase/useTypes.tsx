@@ -10,7 +10,9 @@ export interface BasicInformation{
   email:string,
   location:string,
   phone:string,
-  termsCondition:string
+  termsCondition:string,
+  facebook:string,
+  github:string,
 }
 export interface FAQType{
   question:string,

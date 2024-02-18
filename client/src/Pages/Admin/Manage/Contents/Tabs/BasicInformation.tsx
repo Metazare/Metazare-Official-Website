@@ -19,7 +19,9 @@ export default function BasicInformation() {
       phone:"",
       email:"",
       termsCondition:"",
-      id:""
+      id:"",
+      facebook:"",
+      github:""
     },
     onSubmit:values =>{
       updateBasicInformation(formik.values,formik.values.id)
@@ -33,6 +35,8 @@ export default function BasicInformation() {
       formik.setFieldValue("email",information[0].email)
       formik.setFieldValue("termsCondition",information[0].termsCondition)
       formik.setFieldValue("id",information[0].id)
+      formik.setFieldValue("github",information[0].github)
+      formik.setFieldValue("facebook",information[0].facebook)
     }
   },[information])
   if(informationLoading) return <Loading/>
@@ -79,6 +83,29 @@ export default function BasicInformation() {
             label="Location"
             name="location"
             value={formik.values.location}
+            onChange={formik.handleChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <hr />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <TextField
+            fullWidth
+            id="facebook"
+            label="Facebook Link"
+            name="facebook"
+            value={formik.values.facebook}
+            onChange={formik.handleChange}
+          />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <TextField
+            fullWidth
+            id="github"
+            label="Github Link"
+            name="github"
+            value={formik.values.github}
             onChange={formik.handleChange}
           />
         </Grid>

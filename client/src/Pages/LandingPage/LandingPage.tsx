@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 
 
 // Icons 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CallIcon from '@mui/icons-material/Call';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
+import MouseIcon from '@mui/icons-material/Mouse';
 
 // Components
 import ServiceCard from '../../Components/ServiceCard';
@@ -13,8 +14,6 @@ import Grid from '@mui/material/Grid'
 import SocialMediaButton from '../../Components/SocialMediaButton';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
-// Components
 import CustomSlider from '../../Components/CustomSlider';
 import Loading from '../../Components/Loading';
 
@@ -37,6 +36,9 @@ import Chip from '@mui/material/Chip'
 import useProject from '../../Hooks/Firebase/useProject';
 import { motion } from "framer-motion"
 import SampleAnimation from '../../Components/SampleAnimation';
+import IconButton from '@mui/material/IconButton'
+
+
 function LandingPage() {
   const {data:services,loading:loadingServices,getServicesList} = useServices();
   const {data:information,loading:loadingInformation,getBasicInformation} = useContent();
@@ -65,14 +67,21 @@ function LandingPage() {
       <Container  maxWidth="lg" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"600px"}}>
         <img src={Logo} alt="" width={"60%"}/>
         <Box display="flex" gap={2} mt={2} >
-          <Typography variant="subtitle1" color="initial">About Us</Typography>
-          <Typography variant="subtitle1" color="initial">Contact</Typography>
-          <Typography variant="subtitle1" color="initial">Services</Typography>
-          <Typography variant="subtitle1" color="initial">Projects</Typography>
+          <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#AboutUs'>About Us</Typography>
+          <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#Contact'>Contact</Typography>
+          <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#Services'>Services</Typography>
+          <Typography variant="subtitle1" color="initial" component={"a"} sx={{textDecoration:"none",transition:"all .3s ease-in",":hover":{scale:"1.2",color:"#1976d2"}}} href='#Projects'>Projects</Typography>
         </Box>
       </Container>
     </motion.div>
-    <section style={{ width: "100%",position:"relative" }}>
+    <Box display="flex" justifyContent={"center"}>
+      <a href="#AboutUs">
+        <IconButton aria-label="" sx={{marginTop:"40px",opacity:".5",transition:"all .3s ease-in-out",":hover":{opacity:"1" , scale:"1.3",color:"#1976d2"}}}>
+            <MouseIcon sx={{color:"inherit"}}/>
+        </IconButton>
+      </a>
+    </Box>
+    <section style={{ width: "100%",position:"relative" }} id='AboutUs'>
       <svg style={{zIndex:"-20",position:"absolute",top:"0",left:"0",height:"100%"}} width="100%"  viewBox="0 0 1440 596" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M0 595.136V0C191.838 38.9383 443.91 62.5681 720 62.5681C996.091 62.5681 1248.16 38.9383 1440 4.36563e-06V595.136C1248.16 556.198 996.091 532.568 720 532.568C443.91 532.568 191.838 556.198 0 595.136Z" fill="#0071BC" />
       </svg>
@@ -113,9 +122,9 @@ function LandingPage() {
         </Container>
       </Box>
     </section>
-    <section style={{marginTop:"150px"}}>
+    <section style={{marginTop:"150px"}} id='Services'>
       <Container maxWidth="lg">
-        <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>Our Services</Typography>
+        <Typography variant="h5" color="primary" mb={"5em"} fontWeight={600} textAlign={"center"}>What We Offer</Typography>
         <Box display="flex" flexDirection={"column"} gap={"5em"} alignItems={"center"}>
           {services?.map((service: any,index:number) => (
             <ServiceCard id={service.id} data={service} index={index} admin={false} editFunc={()=>{}} deleteFunc={()=>{}}/>
@@ -123,9 +132,9 @@ function LandingPage() {
         </Box>
       </Container>
     </section>
-    <section style={{marginTop:"150px"}}>
+    <section style={{marginTop:"150px"}} id='Projects'>
       <Container maxWidth="lg">
-        <Typography variant="h5" color="primary"  mb={"1em"} fontWeight={600} textAlign={"center"}>Portfolio</Typography>
+        <Typography variant="h5" color="primary"  mb={"1em"} fontWeight={600} textAlign={"center"}>Our Previous Projects</Typography>
         <Box display="flex" flexWrap={"wrap"} gap={1}  mb={"4em"} justifyContent={"center"} maxWidth={"600px"} margin={"auto"}>
           {tabs("Web Application")}
           {tabs("Mobile Application")}
@@ -250,7 +259,7 @@ function LandingPage() {
         
       </Container>
     </section>
-    <section style={{marginTop:"150px",background:"#0071BC", padding:"5em 0 3em"}}>
+    <section style={{marginTop:"150px",background:"#0071BC", padding:"5em 0 3em"}} id='Contact'>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item md={7} xs={12}>
@@ -324,6 +333,15 @@ function LandingPage() {
           <Grid item md={5} xs={12}>
             <Typography variant="body1" color="white">Hey! We are looking forward to start a project with you.</Typography>
             <Grid container spacing={2} mt={1}>
+            <Grid item  xs={12}>
+                <TextField
+                  fullWidth
+                  id='Email'
+                  placeholder='Your Name'
+                  variant='outlined'
+                  style={{background:"white",border:"none",borderRadius:"8px"}}
+                />
+              </Grid>
               <Grid item  xs={12}>
                 <TextField
                   fullWidth
@@ -339,13 +357,15 @@ function LandingPage() {
                   rows={3}
                   fullWidth
                   id='Email'
-                  placeholder='Your Email'
+                  placeholder='Your Message'
                   variant='outlined'
                   style={{background:"white",border:"none",borderRadius:"8px"}}
                 />
               </Grid>
-              <Grid item  xs={4}>
-                <Button variant="contained" sx={{background:"white", color:"black"}}>Submit</Button>
+              <Grid item  xs={12}>
+                <Box display="flex" justifyContent={"end"}>
+                  <Button variant="contained" sx={{background:"white", color:"black",":hover":{color:"white"}}}>Submit</Button>
+                </Box>
               </Grid>
             </Grid>
           </Grid>

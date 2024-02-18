@@ -121,7 +121,7 @@ function AddProjects({modalClose,addFunc,addProjectType}:Props) {
 
   return (
     <Box sx={{minWidth:{md:"500px",xs:"300px"}}}>
-      <Typography variant="h5" fontWeight={600} color="primary">Add Services</Typography>
+      <Typography variant="h5" fontWeight={600} color="primary">Add Project</Typography>
       <Box display="flex" alignItems={"center"} margin={".5em 0 1em"}>
         <FormButton num={1} toolTip={"Basic Information"}/>
         <hr style={{flexGrow:1}} />
