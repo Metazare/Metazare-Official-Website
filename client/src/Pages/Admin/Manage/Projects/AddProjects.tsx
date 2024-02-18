@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 
-import {useFormik } from 'formik'
+import {Formik, useFormik } from 'formik'
 import { ProjectType } from '../../../../Hooks/Firebase/useTypes'
 import Button from '@mui/material/Button'
 
@@ -21,16 +21,19 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs  from 'dayjs';
 import ProjectCard from '../../../../Components/ProjectCard'
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type Props={
   modalClose:() => void
   addFunc: (data: ProjectType) => void
+  addProjectType:string
 }
-function AddProjects({modalClose,addFunc}:Props) {
+function AddProjects({modalClose,addFunc,addProjectType}:Props) {
   const {downloadURL,uploadFile} =useFirebase();
   const [uploadFileValue,setUploadFileValue] = useState<any>();
-
   const [formPage,setFormPage] = useState(1)
   const FormButton = ({ num , toolTip}: { num: number,toolTip:string}) => {
     return (
@@ -53,7 +56,9 @@ function AddProjects({modalClose,addFunc}:Props) {
       modalClose();
     }
   },[downloadURL])
-
+  useEffect(()=>{
+    AddProjectForm.setFieldValue("type",addProjectType)
+  },[])
   const AddProjectForm = useFormik({
     initialValues:{
       title:"",
@@ -61,7 +66,7 @@ function AddProjects({modalClose,addFunc}:Props) {
       description:"",
       image:"",
       id:"",
-      type: "Mobile Application",
+      type: "Games",
       createdAt: new Date().getTime(),
     },
     validate: (values) => {
@@ -89,6 +94,7 @@ function AddProjects({modalClose,addFunc}:Props) {
       switch (formPage) {
         case 1:
           setFormPage(2)
+          AddProjectForm.setFieldValue("type",addProjectType)
           break;
         case 2:
           setFormPage(3)
@@ -136,6 +142,22 @@ function AddProjects({modalClose,addFunc}:Props) {
             error={AddProjectForm.touched.description && AddProjectForm.errors.description !== undefined}
             helperText={AddProjectForm.touched.description && AddProjectForm.errors.description}
           />
+          <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Type</Typography>
+          <FormControl sx={{minWidth: "400px" }}>
+            <Select
+              name='type'
+              value={AddProjectForm.values.type}
+              onChange={AddProjectForm.handleChange}
+              sx={{width:"100%"}}
+            >
+              <MenuItem value={"Mobile Application"}>Mobile Application</MenuItem>
+              <MenuItem value={"Web Application"}>Web Application</MenuItem>
+              <MenuItem value={"Games"}>Games</MenuItem>
+              <MenuItem value={"UI/UX Design"}>UI/UX Design</MenuItem>
+              <MenuItem value={"Logo Design"}>Logo Design</MenuItem>
+            </Select>
+          </FormControl>
+
           <Typography mt={1} mb={".5em"} variant="subtitle2" color="initial">Date</Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['DatePicker', 'DatePicker']}>

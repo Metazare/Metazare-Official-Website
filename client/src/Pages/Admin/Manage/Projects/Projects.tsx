@@ -38,7 +38,7 @@ export default function Projects() {
           <Tab value="Logo Design" label="Logo Design" />
         </Tabs>
       </Box>
-      <IconButton onClick={()=>{setOpenModal(<AddProjects modalClose={closeModal} addFunc={postProject}/>)}}>
+      <IconButton onClick={()=>{setOpenModal(<AddProjects modalClose={closeModal} addProjectType={tabValue} addFunc={postProject}/>)}}>
         <AddIcon/>
       </IconButton>
     </Box>

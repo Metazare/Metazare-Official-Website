@@ -11,8 +11,6 @@ import useModal from '../Hooks/Firebase/useModal'
 import UpdateProject from '../Pages/Admin/Manage/Projects/UpdateProject'
 import Tooltip from '@mui/material/Tooltip'
 
-import { motion } from "framer-motion"
-
 
 interface Props{
   data:ProjectType
@@ -45,7 +43,7 @@ function ProjectCard({variant,data,deleteFunc,updateFunc}:Props) {
           </>}
         </Paper>
         <Box mt={".5em"} padding={"0 .5em"}>
-          <Typography variant="body1" color="initial" sx={{opacity:".9"}}>{data.title}</Typography>
+          <Typography variant="body1" color="initial" sx={{opacity:".9",width:{md:"270px",sm:"350px",xs:"100%"}}}>{data.title}</Typography>
           <Typography variant="subtitle2" color="initial" sx={{opacity:".7",fontSize:"11px"}}>{dayjs(data.date).format('MMM D, YYYY h:mm A' )}</Typography>
         </Box>
       </Box>

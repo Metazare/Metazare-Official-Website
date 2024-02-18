@@ -148,7 +148,7 @@ function LandingPage() {
                 initial={{ scale: 0.9, opacity: 0.1 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
-                  duration: 1,
+                  duration: .6,
                   delay: .20 * index ,
                   ease: "backInOut",
                 }}  
@@ -161,7 +161,7 @@ function LandingPage() {
                 initial={{ scale: 0.9, opacity: 0.1 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
-                  duration: 1,
+                  duration: .6,
                   delay: .20 * index ,
                   ease: "backInOut",
                 }}  
@@ -174,7 +174,7 @@ function LandingPage() {
                 initial={{ scale: 0.9, opacity: 0.1 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
-                  duration: 1,
+                  duration: .6,
                   delay: .20 * index ,
                   ease: "backInOut",
                 }}  
@@ -187,7 +187,7 @@ function LandingPage() {
                 initial={{ scale: 0.9, opacity: 0.1 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
-                  duration: 1,
+                  duration: .6,
                   delay: .20 * index ,
                   ease: "backInOut",
                 }}  
@@ -200,7 +200,7 @@ function LandingPage() {
                 initial={{ scale: 0.9, opacity: 0.1 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
-                  duration: 1,
+                  duration: .6,
                   delay: .20 * index ,
                   ease: "backInOut",
                 }}  
@@ -217,7 +217,7 @@ function LandingPage() {
         initial={{ scale: 0.9, opacity: 0.1 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{
-          duration: 1,
+          duration: .6,
           delay:.25,
           ease: "backInOut",
         }} 
