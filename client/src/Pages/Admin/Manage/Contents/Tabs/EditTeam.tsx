@@ -239,7 +239,7 @@ export default function EditTeam({data,editFunc,modalClose}:Props) {
         </>}
         {formPage === 4 && <>
           <Box minHeight={"300px"} sx={{background:"#1A1918",borderRadius:"8px", padding:"2em 1em"}} mt={1}>
-            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={downloadURL} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
+            <TeamCard name={formik.values.name} roles={formik.values.roles} gmail={formik.values.gmail} description={formik.values.description} image={formik.values.image} facebook={formik.values.facebook} github={formik.values.github} website={formik.values.website}/>
           </Box>
         </>}
         <Grid container spacing={2} mt={2}>
