@@ -31,7 +31,7 @@ function ProjectCard({variant,data,deleteFunc,updateFunc}:Props) {
           </Paper>
           <Box mt={".5em"} padding={"0 .5em"}>
             <Typography variant="body1" color="initial" sx={{opacity:".9",width:{md:"270px",sm:"350px",xs:"100%"}}}>{data.title}</Typography>
-            <Typography variant="subtitle2" color="initial" sx={{opacity:".7",fontSize:"11px"}}>{dayjs(data.date).format('MMM D, YYYY h:mm A' )}</Typography>
+            <Typography variant="subtitle2" color="initial" sx={{opacity:".7",fontSize:"11px"}}>{dayjs(data.date).format('MMM D, YYYY' )}</Typography>
           </Box>
         </Box>
       </a>
@@ -56,7 +56,7 @@ function ProjectCard({variant,data,deleteFunc,updateFunc}:Props) {
         </Paper>
         <Box mt={".5em"} padding={"0 .5em"}>
           <Typography variant="body1" color="initial" sx={{opacity:".9",width:{md:"270px",sm:"350px",xs:"100%"}}}>{data.title}</Typography>
-          <Typography variant="subtitle2" color="initial" sx={{opacity:".7",fontSize:"11px"}}>{dayjs(data.date).format('MMM D, YYYY h:mm A' )}</Typography>
+          <Typography variant="subtitle2" color="initial" sx={{opacity:".7",fontSize:"11px"}}>{dayjs(data.date).format('MMM D, YYYY' )}</Typography>
         </Box>
       </Box>
     </>}
